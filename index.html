@@ -115,10 +115,18 @@ nav.main a:hover{background:rgba(255,255,255,.08);color:var(--gold)}
 .term span{color:var(--muted);font-size:16px;line-height:1.45}
 
 /* catalog */
-.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
-.chip{min-height:48px;padding:0 20px;border-radius:24px;border:2px solid var(--line);background:var(--paper);color:var(--ink);font:600 16px var(--sans);cursor:pointer}
-.chip:hover{border-color:var(--gold)}
-.chip[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:#f3ecd6}
+.cats{display:grid;grid-template-columns:repeat(5,1fr);gap:24px 20px;margin-bottom:40px}
+.cat{display:grid;gap:10px;align-content:start;padding:0;border:0;background:none;color:var(--ink);font:inherit;text-align:center;cursor:pointer;border-radius:18px}
+.cat-img{position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:var(--line);box-shadow:0 0 0 3px transparent;transition:box-shadow .2s}
+.cat-img img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.cat:hover .cat-img img{transform:scale(1.05)}
+.cat:hover .cat-img{box-shadow:0 0 0 3px rgba(209,171,85,.55)}
+.cat-name{display:grid;place-items:center;min-height:52px;padding:8px 10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;font:600 16px/1.25 var(--sans);transition:background .2s,color .2s}
+.cat[aria-pressed="true"] .cat-img{box-shadow:0 0 0 3px var(--gold)}
+.cat[aria-pressed="true"] .cat-name{background:var(--btn);border-color:var(--btn);color:var(--btn-ink)}
+.cat-sale{display:grid;place-content:center;gap:4px;background:radial-gradient(circle at 25% 20%,rgba(255,255,255,.16) 0 18%,transparent 19%),radial-gradient(circle at 85% 85%,rgba(0,0,0,.14) 0 26%,transparent 27%),var(--sale);color:#fff}
+.cat-sale b{font:700 clamp(44px,6vw,72px)/1 var(--serif)}
+.cat-sale span{font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px}
 .card{background:var(--paper);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
 .card-img{position:relative;aspect-ratio:1/1;background:var(--line)}
@@ -287,8 +295,16 @@ footer nav a{color:#d9e2d4}
   .term:nth-child(2){border-right:0}
   .term:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .contacts-grid{grid-template-columns:1fr 1fr}
+  .cats{gap:18px 12px}
+  .cat-name{font-size:14px;min-height:48px;padding:6px}
 }
 @media (max-width:760px){
+  .cats{display:flex;overflow-x:auto;gap:12px;margin:0 -20px 28px;padding:4px 20px 10px;scroll-snap-type:x proximity;scrollbar-width:none}
+  .cats::-webkit-scrollbar{display:none}
+  .cat{flex:0 0 118px;scroll-snap-align:start}
+  .cat-img{border-radius:14px}
+  .cat-sale b{font-size:40px}
+  .cat-sale span{font-size:11px}
   .co-grid{grid-template-columns:1fr;gap:28px}
   .co-summary{position:static;padding:22px 18px}
   .co-body{padding-block:24px 40px}
@@ -411,7 +427,7 @@ footer nav a{color:#d9e2d4}
         <h2>Оберіть саджанці</h2>
         <p>Натисніть на категорію, щоб побачити лише потрібні рослини. Ціна вказана за один саджанець, якщо не написано інше.</p>
       </div>
-      <div class="filters" id="filters" role="group" aria-label="Категорії"></div>
+      <div class="cats" id="filters" role="group" aria-label="Категорії саджанців"></div>
       <div class="grid" id="grid"></div>
     </div>
   </section>
@@ -549,16 +565,18 @@ const CONFIG = {
 };
 
 /* ====== ТОВАРИ: додавайте / змінюйте тут ====== */
+// img — фото плитки категорії; also — які ще категорії показувати разом із цією
 const CATEGORIES = [
-  {id:"all", name:"Усі"},
-  {id:"roses", name:"Троянди"},
-  {id:"fruit", name:"Плодові дерева"},
-  {id:"berries", name:"Ягоди"},
-  {id:"grapes", name:"Виноград"},
-  {id:"nuts", name:"Горіхи"},
-  {id:"exotic", name:"Екзотичні"},
-  {id:"decor", name:"Декоративні"},
-  {id:"sale", name:"Акції"}
+  {id:"all", name:"Усі саджанці", img:"img/seedlings.jpg"},
+  {id:"roses", name:"Троянди", img:"img/rose1.jpg"},
+  {id:"fruit", name:"Плодові", img:"img/apple.jpg"},
+  {id:"berries", name:"Ягоди", img:"img/blackberry.jpg", also:["strawberry"]},
+  {id:"strawberry", name:"Полуниця", img:"img/strawberry.jpg"},
+  {id:"grapes", name:"Виноград", img:"img/grapes.jpg"},
+  {id:"nuts", name:"Горіхи", img:"img/walnut.jpg"},
+  {id:"exotic", name:"Екзотичні", img:"img/fig.jpg"},
+  {id:"decor", name:"Декоративні", img:"img/lavender.jpg"},
+  {id:"sale", name:"Акційні"}
 ];
 const PRODUCTS = [
   {id:1, cat:"roses", name:"Троянда плетиста «Воллертон Олд Хол»", note:"Кремово-абрикосова, сильний аромат, до 3 м", price:115, img:"img/rose1.jpg", stock:true},
@@ -571,7 +589,7 @@ const PRODUCTS = [
   {id:8, cat:"berries", name:"Ожина «Потрійна корона»", note:"Без колючок, великі солодкі ягоди", price:140, old:160, img:"img/blackberry.jpg", stock:false},
   {id:9, cat:"berries", name:"Малина ремонтантна «Полька»", note:"Плодоносить з липня до морозів", price:85, img:"img/raspberry.jpg", stock:false},
   {id:10, cat:"berries", name:"Агрус «Командор»", note:"Майже без шипів, стійкий до хвороб", price:95, img:"img/gooseberry.jpg", stock:false},
-  {id:11, cat:"berries", name:"Полуниця «Альбіон», 5 розеток", note:"Ремонтантна, плодоносить усе літо", price:150, img:"img/strawberry.jpg", stock:false},
+  {id:11, cat:"strawberry", name:"Полуниця «Альбіон», 5 розеток", note:"Ремонтантна, плодоносить усе літо", price:150, img:"img/strawberry.jpg", stock:false},
   {id:12, cat:"grapes", name:"Виноград «Аркадія»", note:"Столовий, ранній, грона до 1 кг", price:130, img:"img/grapes.jpg", stock:false},
   {id:13, cat:"nuts", name:"Горіх грецький «Ідеал»", note:"Скороплідний, перші горіхи на 2–3 рік", price:220, img:"img/walnut.jpg", stock:false},
   {id:14, cat:"exotic", name:"Інжир «Брунсвік»", note:"Витримує до −25 °C з укриттям", price:240, img:"img/fig.jpg", stock:false}
@@ -610,11 +628,22 @@ const updateCount = () => { $("#cartCount").textContent = cartItems().reduce((s,
 // фільтри й товари
 let current = "all";
 function renderFilters() {
-  $("#filters").innerHTML = CATEGORIES.map(c =>
-    `<button class="chip" data-cat="${c.id}" aria-pressed="${c.id === current}">${c.name}</button>`).join("");
+  $("#filters").innerHTML = CATEGORIES.map(c => `
+    <button type="button" class="cat" data-cat="${c.id}" aria-pressed="${c.id === current}">
+      ${c.img
+        ? `<span class="cat-img"><img src="${c.img}" alt="" loading="lazy" width="600" height="600"></span>`
+        : `<span class="cat-img cat-sale" aria-hidden="true"><b>−%</b><span>знижки</span></span>`}
+      <span class="cat-name">${c.name}</span>
+    </button>`).join("");
+}
+function inCategory(p, id) {
+  if (id === "all") return true;
+  if (id === "sale") return !!p.old;
+  const c = CATEGORIES.find(x => x.id === id) || {};
+  return p.cat === id || (c.also || []).includes(p.cat);
 }
 function renderGrid() {
-  const list = PRODUCTS.filter(p => current === "all" || (current === "sale" ? p.old : p.cat === current));
+  const list = PRODUCTS.filter(p => inCategory(p, current));
   $("#grid").innerHTML = list.map(p => `
     <article class="card">
       <div class="card-img">
