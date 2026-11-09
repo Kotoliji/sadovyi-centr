@@ -273,25 +273,21 @@ form.order input:focus,form.order textarea:focus{border-color:var(--gold);outlin
 .done .row{display:flex;flex-wrap:wrap;gap:10px}
 .small{font-size:15px;color:var(--muted)}
 
-/* payment */
-.pay-sum{background:var(--forest);color:#f3ecd6;border-radius:14px;padding:18px 20px;display:grid;gap:2px}
-.pay-sum span{font-size:15px;color:#c9d5c4}
-.pay-sum b{font-size:34px;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1.2}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--line);padding:4px;border-radius:12px}
-.tabs button{min-height:48px;border:0;border-radius:9px;background:transparent;color:var(--ink);font:600 15px var(--sans);cursor:pointer}
-.tabs button[aria-selected="true"]{background:var(--paper);box-shadow:0 1px 4px rgba(0,0,0,.14)}
-.qr-box{background:#fff;border-radius:14px;padding:18px;display:grid;justify-items:center;gap:12px;border:1px solid var(--line)}
-.qr-box p{color:#1b2a21;font-size:15px;text-align:center;line-height:1.45}
-#qr img,#qr canvas{width:220px;height:220px}
-.req{background:var(--paper);border:1px solid var(--line);border-radius:12px}
-.req-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
-.req-row:last-child{border-bottom:0}
-.req-row > div{min-width:0}
-.req-row span{display:block;font-size:13px;color:var(--muted)}
-.req-row b{display:block;font-size:16px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+/* order sent */
 .copy{flex:none;min-height:40px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--ground);color:var(--ink);font:600 14px var(--sans);cursor:pointer}
-.copy.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
-.bank-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle;box-shadow:0 0 0 1px var(--muted)}
+.copy.ok,.btn.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.co-lead{text-align:center;font-size:18px;color:var(--muted)}
+.co-lead b{color:var(--ink)}
+.step-num.is-warn{border-color:var(--sale);color:var(--sale)}
+.sent-list{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:6px 20px}
+.sent-list .sum-row{padding:12px 0}
+.call-card{background:var(--forest);color:#f3ecd6;border-radius:16px;padding:22px;display:grid;gap:6px;text-align:center}
+.call-card span{color:#c9d5c4;font-size:16px}
+.call-card b{font:700 28px/1.2 var(--sans);color:var(--gold);white-space:nowrap}
+.call-card .row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.call-card .btn-ghost{color:#f3ecd6}
+.call-card small{color:#aebba9;font-size:14px;margin-top:4px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .h-sub{font-size:20px;margin-top:6px}
 .thanks{text-align:center;justify-items:center;padding-top:30px}
 .thanks h3{font-size:26px}
@@ -512,7 +508,7 @@ footer nav a{color:#d9e2d4}
       <div class="steps-grid">
         <div class="step"><div class="step-num">1</div><h3>Оберіть рослини</h3><p>Натисніть «У кошик» біля потрібних саджанців. Кількість можна змінити в кошику.</p></div>
         <div class="step"><div class="step-num">2</div><h3>Залиште контакти</h3><p>Вкажіть ім’я, телефон, місто та відділення Нової Пошти. Ми передзвонимо й уточнимо деталі.</p></div>
-        <div class="step"><div class="step-num">3</div><h3>Оплатіть зручним способом</h3><p>Відскануйте QR-код у Приват24, monobank чи Ощад 24/7 або переказуйте на картку. Можна внести лише аванс 100 грн, а решту сплатити на пошті.</p></div>
+        <div class="step"><div class="step-num">3</div><h3>Підтвердимо й відправимо</h3><p>Ми зателефонуємо, підтвердимо замовлення й повідомимо реквізити. Достатньо внести аванс 100 грн, а решту сплатити на пошті.</p></div>
       </div>
     </div>
   </section>
@@ -528,7 +524,7 @@ footer nav a{color:#d9e2d4}
           <div class="fact"><dt>Як пакуємо</dt><dd>Коріння у вологому субстраті та плівці, гілки захищені. Кожен сорт підписаний.</dd></div>
           <div class="fact"><dt>Коли відправляємо</dt><dd>Троянди й лаванду — одразу. Плодові та ягідні — у сезон посадки: весна (березень–квітень) та осінь (жовтень–листопад).</dd></div>
           <div class="fact"><dt>Вартість доставки</dt><dd>За тарифами Нової Пошти, зазвичай 80–150 грн за посилку.</dd></div>
-          <div class="fact"><dt>Оплата</dt><dd>Уся сума одразу або аванс 100 грн, а решта — накладеним платежем при отриманні. Оплата за QR-кодом чи реквізитами (Приват24, monobank, Ощад 24/7 та інші банки) або переказом на картку ПриватБанку, monobank чи Ощадбанку.</dd></div>
+          <div class="fact"><dt>Оплата</dt><dd>Після замовлення ми зателефонуємо й повідомимо реквізити. Можна сплатити всю суму одразу або аванс 100 грн, а решту — накладеним платежем при отриманні.</dd></div>
         </dl>
       </div>
       <div class="photo-frame"><img src="img/seedlings.jpg" alt="Молоді саджанці на стелажах у теплиці" width="900" height="700" loading="lazy"></div>
@@ -612,7 +608,6 @@ footer nav a{color:#d9e2d4}
   <div class="wrap co-body" id="coBody"></div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 /* ====== НАЛАШТУВАННЯ: змініть на свої дані ====== */
 const CONFIG = {
@@ -621,19 +616,11 @@ const CONFIG = {
   instagram: "family_garden_center", // нік в Instagram без @
   minOrder: 300,
   prepay: 100,
+  hours: "щодня з 9:00 до 20:00",
 
-  // Реквізити для оплати (QR НБУ працює в Приват24, monobank, Ощад 24/7 та інших банках)
-  payee: "ФОП Прізвище Ім'я По батькові",
-  iban: "UA000000000000000000000000000",  // 29 символів, починається з UA
-  taxId: "0000000000",                     // РНОКПП (ІПН) або ЄДРПОУ отримувача
-
-  // Картки для переказу — залиште порожнім number, щоб приховати банк
-  cards: [
-    {bank: "ПриватБанк", number: "0000 0000 0000 0000", color: "#6cb33f"},
-    {bank: "monobank",   number: "0000 0000 0000 0000", color: "#111111"},
-    {bank: "Ощадбанк",   number: "0000 0000 0000 0000", color: "#00733c"}
-  ],
-  monoJar: ""  // необов'язково: посилання на банку monobank, напр. https://send.monobank.ua/jar/XXXXXXX
+  // Куди сайт надсилає замовлення (Cloudflare Worker, який пересилає його в Telegram).
+  // ⚠ Поки порожньо — ДЕМО: покупець бачить «Замовлення надіслано», але замовлення нікуди не приходить.
+  orderEndpoint: ""
 };
 
 /* ====== ТОВАРИ: додавайте / змінюйте тут ====== */
@@ -945,13 +932,6 @@ function orderNo() {
   return `СЦ-${String(d.getFullYear()).slice(2)}${p(d.getMonth() + 1)}${p(d.getDate())}-${Math.floor(100 + Math.random() * 900)}`;
 }
 
-// посилання-QR за стандартом НБУ (Приват24, monobank, Ощад 24/7 та ін.)
-function nbuLink(amount, purpose) {
-  const data = ["BCD", "002", "1", "UCT", "", CONFIG.payee, CONFIG.iban.replace(/\s/g, ""),
-    "UAH" + amount.toFixed(2), CONFIG.taxId, "", "", purpose.slice(0, 140), ""].join("\n");
-  const b64 = btoa(unescape(encodeURIComponent(data))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-  return "https://bank.gov.ua/qr/" + b64;
-}
 
 function copyText(text, btn) {
   const old = btn.textContent;
@@ -968,8 +948,6 @@ function copyText(text, btn) {
   else fallback();
 }
 
-const reqRow = (label, value, copy = value) =>
-  `<div class="req-row"><div><span>${label}</span><b>${esc(value)}</b></div><button type="button" class="copy" data-copy="${esc(copy)}">Копіювати</button></div>`;
 
 // ---------- кошик: кількість, видалення ----------
 $("#drawerBody").addEventListener("click", e => {
@@ -1029,6 +1007,7 @@ function renderCheckout() {
         <input id="c-np" name="np" required placeholder="${PLACES["У відділення"]}" aria-label="${PLACES["У відділення"]}">
 
         <h2>Додаткова інформація</h2>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <label for="c-note">Нотатки до замовлення (необов'язково)<textarea id="c-note" name="note" rows="4" placeholder="Нотатки до вашого замовлення, наприклад спеціальні нотатки для доставки."></textarea></label>
       </div>
 
@@ -1041,12 +1020,12 @@ function renderCheckout() {
         <div class="sum-row sum-total"><b>Загалом</b><b class="num">${money(total)}</b></div>
 
         <div class="pay-box">
-          <label class="pay-line" for="c-pay"><input type="radio" id="c-pay" name="pay" checked> Банківські реквізити</label>
-          <p>Сплата авансового платежу ${money(CONFIG.prepay)} є обов'язковою! Реквізити ПриватБанку, monobank та Ощадбанку з'являться після підтвердження замовлення.</p>
+          <div class="pay-line" style="cursor:default">Оплата після підтвердження</div>
+          <p>Після замовлення ми зателефонуємо, підтвердимо наявність і повідомимо реквізити. Аванс — ${money(CONFIG.prepay)}, решта — при отриманні на Новій Пошті.</p>
         </div>
 
         <p class="small">Ваші особисті дані використовуватимуться для обробки вашого замовлення та для інших цілей, описаних у нашій <a href="oferta.html#privacy" target="_blank" rel="noopener">політиці конфіденційності</a>.</p>
-        <button class="btn btn-gold co-submit" type="submit">Підтвердити замовлення</button>
+        <button class="btn btn-gold co-submit" type="submit">Надіслати замовлення</button>
       </aside>
     </form>`;
 }
@@ -1060,84 +1039,108 @@ $("#coBody").addEventListener("input", e => {
   if (e.target.id === "c-phone") e.target.setCustomValidity("");
 });
 
-let order = null;
+let order = null, sending = false;
+const normPhone = d => "+" + (d.length === 10 ? "38" + d : d);
 $("#coBody").addEventListener("submit", e => {
   e.preventDefault();
+  if (sending) return;
   const form = e.target, phone = form.querySelector("#c-phone"), d = digits(phone.value);
   if (!(/^0\d{9}$/.test(d) || /^380\d{9}$/.test(d))) {
     phone.setCustomValidity("Вкажіть номер у форматі 067 123 45 67 або +380 67 123 45 67");
     phone.reportValidity();
     return;
   }
-  const f = new FormData(form), total = cartTotal(), num = orderNo();
-  const name = `${f.get("first")} ${f.get("last")}`.trim();
-  const lines = cartItems().map(({p, q}) => `• ${p.name} — ${q} шт × ${p.price} = ${money(p.price * q)}`);
+  const f = new FormData(form), get = k => String(f.get(k) || "").trim();
   order = {
-    num, total, toPay: Math.min(CONFIG.prepay, total),
-    purpose: `Аванс за замовлення ${num}, ${name}`,
-    text: `Замовлення ${num} з сайту «Сімейний садовий центр»\n\n${lines.join("\n")}\n\nЗагалом: ${money(total)}\n` +
-      `Аванс ${money(Math.min(CONFIG.prepay, total))}, решта ${money(Math.max(0, total - CONFIG.prepay))} — накладеним платежем` +
-      `\n\nІм'я: ${name}\nТелефон: ${f.get("phone")}\nE-mail: ${f.get("email")}\nДоставка: ${f.get("type")}, ${f.get("city")}, ${f.get("np")}` +
-      (f.get("note") ? `\nНотатки: ${f.get("note")}` : "")
+    num: orderNo(),
+    first: get("first"),
+    name: `${get("first")} ${get("last")}`.trim(),
+    phone: normPhone(d),
+    email: get("email"),
+    delivery: {type: get("type"), city: get("city"), np: get("np")},
+    note: get("note"),
+    items: cartItems().map(({p, q}) => ({name: p.name, qty: q, price: p.price})),
+    total: cartTotal(),
+    website: get("website")
   };
-  cart = {}; save(); updateCount();
-  showPayment();
+  submitOrder(form.querySelector(".co-submit"));
 });
 
-function showPayment() {
-  const o = order, link = nbuLink(o.toPay, o.purpose), enc = encodeURIComponent(o.text);
-  const cards = CONFIG.cards.filter(c => c.number);
+function orderText(o) {
+  return `Замовлення ${o.num} з сайту «Сімейний садовий центр»\n\n` +
+    o.items.map(i => `• ${i.name} — ${i.qty} шт × ${i.price} = ${money(i.price * i.qty)}`).join("\n") +
+    `\n\nРазом: ${money(o.total)}\n\nІм'я: ${o.name}\nТелефон: ${o.phone}\nE-mail: ${o.email}` +
+    `\nДоставка: ${o.delivery.type}, ${o.delivery.city}, ${o.delivery.np}` + (o.note ? `\nНотатки: ${o.note}` : "");
+}
+
+// надсилає замовлення на CONFIG.orderEndpoint (Cloudflare Worker → Telegram)
+async function submitOrder(btn) {
+  sending = true;
+  if (btn) { btn.disabled = true; btn.textContent = "Надсилаємо…"; }
+  try {
+    if (!CONFIG.orderEndpoint) {
+      // ДЕМО: бот ще не підключений — замовлення нікуди не надсилається, лише показуємо екран «надіслано»
+      console.info("Демо-режим: orderEndpoint порожній, замовлення не надіслано", order);
+      cart = {}; save(); updateCount();
+      showSent();
+      return;
+    }
+    const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 15000);
+    const r = await fetch(CONFIG.orderEndpoint, {
+      method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(order), signal: ctrl.signal
+    });
+    clearTimeout(timer);
+    const res = await r.json().catch(() => ({}));
+    if (!r.ok || !res.ok) throw new Error(res.error || "HTTP " + r.status);
+    cart = {}; save(); updateCount();
+    showSent();
+  } catch (err) {
+    console.warn("Замовлення не надіслано:", err);
+    showFailed();
+  } finally {
+    sending = false;
+  }
+}
+
+const callCard = title => `
+      <div class="call-card">
+        <span>${title}</span>
+        <b>${CONFIG.phone}</b>
+        <div class="row">
+          <a class="btn btn-gold" href="tel:${CONFIG.phoneRaw}">Зателефонувати</a>
+          <a class="btn btn-ghost" href="viber://chat?number=${encodeURIComponent(CONFIG.phoneRaw)}">Viber</a>
+        </div>
+        <small>Приймаємо дзвінки ${CONFIG.hours}</small>
+      </div>`;
+
+function showSent() {
+  const o = order;
   $("#coBody").innerHTML = `
     <div class="done co-done">
       <div class="step-num">✓</div>
-      <h2>Дякуємо, замовлення прийнято!</h2>
-      <p>Номер замовлення: <b>${o.num}</b>. Щоб ми його відправили, сплатіть аванс і надішліть нам квитанцію.</p>
-      <div class="pay-sum">
-        <span>Аванс до сплати</span>
-        <b>${money(o.toPay)}</b>
-        <span>Решту ${money(Math.max(0, o.total - o.toPay))} сплатите на Новій Пошті при отриманні</span>
+      <h2>Замовлення надіслано!</h2>
+      <p class="co-lead">Дякуємо${o.first ? ", " + esc(o.first) : ""}! Замовлення <b>${o.num}</b> вже у нас. Ми зателефонуємо вам на <b>${esc(o.phone)}</b> найближчим часом, щоб підтвердити наявність, доставку й оплату.</p>
+      <div class="sent-list">
+        ${o.items.map(i => `<div class="sum-row"><span>${esc(i.name)} <b>× ${i.qty}</b></span><span class="num">${money(i.price * i.qty)}</span></div>`).join("")}
+        <div class="sum-row sum-total"><b>Разом</b><b class="num">${money(o.total)}</b></div>
       </div>
-
-      <div class="tabs" role="tablist" aria-label="Спосіб оплати">
-        <button type="button" role="tab" data-tab="qr" aria-selected="true">QR-код / IBAN</button>
-        <button type="button" role="tab" data-tab="card" aria-selected="false">На картку</button>
-      </div>
-
-      <div id="tab-qr" class="done">
-        <div class="qr-box">
-          <div id="qr" aria-label="QR-код для оплати"></div>
-          <p>Відкрийте <b>Приват24</b>, <b>monobank</b>, <b>Ощад 24/7</b> або інший банк і відскануйте код — сума та реквізити підставляться самі.</p>
-        </div>
-        <a class="btn btn-gold" href="${link}" target="_blank" rel="noopener">Оплатити в застосунку банку</a>
-        <div class="req">
-          ${reqRow("Отримувач", CONFIG.payee)}
-          ${reqRow("IBAN", CONFIG.iban, CONFIG.iban.replace(/\s/g, ""))}
-          ${reqRow("РНОКПП / ЄДРПОУ", CONFIG.taxId)}
-          ${reqRow("Сума", money(o.toPay), o.toPay.toFixed(2))}
-          ${reqRow("Призначення платежу", o.purpose)}
-        </div>
-      </div>
-
-      <div id="tab-card" class="done" hidden>
-        <p class="small">Переказ з будь-якої картки. У коментарі до переказу напишіть номер замовлення <b>${o.num}</b>.</p>
-        <div class="req">
-          ${cards.map(c => reqRow(`<i class="bank-dot" style="background:${c.color}"></i>${esc(c.bank)}`, c.number, digits(c.number))).join("")}
-          ${reqRow("Сума", money(o.toPay), o.toPay.toFixed(2))}
-        </div>
-        ${CONFIG.monoJar ? `<a class="btn btn-main" href="${esc(CONFIG.monoJar)}" target="_blank" rel="noopener">Оплатити через банку monobank</a>` : ""}
-      </div>
-
-      <h3 class="h-sub">Надішліть замовлення і квитанцію</h3>
-      <div class="row">
-        <a class="btn btn-gold" href="viber://forward?text=${enc}">Надіслати у Viber</a>
-      </div>
-      <button type="button" class="btn btn-ghost" data-copy="${esc(o.text)}">Скопіювати текст замовлення</button>
-      <p class="small">Або зателефонуйте: <b>${CONFIG.phone}</b></p>
+      ${callCard("Хочете швидше або маєте питання? Зателефонуйте:")}
       <button type="button" class="btn btn-main" id="coDone">Повернутися на сайт</button>
     </div>`;
-  const box = $("#qr");
-  if (window.QRCode) new QRCode(box, {text: link, width: 220, height: 220, correctLevel: QRCode.CorrectLevel.M});
-  else box.innerHTML = `<p>QR-код не завантажився. Скористайтеся кнопкою нижче або реквізитами.</p>`;
+  $("#checkout").scrollTop = 0;
+}
+
+function showFailed() {
+  $("#coBody").innerHTML = `
+    <div class="done co-done">
+      <div class="step-num is-warn">!</div>
+      <h2>Не вдалося надіслати замовлення</h2>
+      <p class="co-lead">Схоже, проблема зі зв'язком. Ваш кошик збережено — спробуйте ще раз або просто зателефонуйте нам, і ми оформимо замовлення по телефону.</p>
+      <button type="button" class="btn btn-gold" id="coRetry">Спробувати ще раз</button>
+      ${callCard("Оформимо замовлення по телефону:")}
+      <button type="button" class="btn btn-ghost" data-copy="${esc(orderText(order))}">Скопіювати текст замовлення</button>
+    </div>`;
   $("#checkout").scrollTop = 0;
 }
 
@@ -1145,12 +1148,7 @@ $("#coBody").addEventListener("click", e => {
   const t = e.target.closest("button");
   if (!t) return;
   if (t.dataset.copy !== undefined) { copyText(t.dataset.copy, t); return; }
-  if (t.dataset.tab) {
-    document.querySelectorAll("[data-tab]").forEach(b => b.setAttribute("aria-selected", b === t));
-    $("#tab-qr").hidden = t.dataset.tab !== "qr";
-    $("#tab-card").hidden = t.dataset.tab !== "card";
-    return;
-  }
+  if (t.id === "coRetry" && !sending) { submitOrder(t); return; }
   if (t.id === "coDone") { closeCheckout(); order = null; }
 });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("#checkout").hidden) $("#coBack").click(); });
