@@ -235,7 +235,7 @@ nav.main a:hover{background:rgba(255,255,255,.08);color:var(--gold)}
 .about .sign{margin-top:18px;font-family:var(--serif);color:var(--gold);font-size:20px}
 
 /* contacts */
-.contacts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.contacts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .contact{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:6px;text-decoration:none}
 .contact:hover{border-color:var(--gold)}
 .contact span{font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
@@ -349,6 +349,7 @@ footer nav a{color:#d9e2d4}
   .term:nth-child(2){border-right:0}
   .term:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .contacts-grid{grid-template-columns:1fr 1fr}
+  .contacts-grid .contact:last-child{grid-column:1/-1}
   .cats{gap:18px 12px}
   .cat-name{font-size:14px;min-height:48px;padding:6px}
   .pv-top{gap:32px}
@@ -436,7 +437,7 @@ footer nav a{color:#d9e2d4}
     </nav>
     <a class="head-phone" href="#contacts" data-phone-link>
       <span>Приймаємо замовлення 9:00–20:00</span>
-      <b data-phone>+38 (000) 000 00 00</b>
+      <b data-phone>+38 (068) 983 40 28</b>
     </a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Меню</button>
     <button class="cart-btn" id="cartOpen" aria-label="Відкрити кошик">
@@ -571,10 +572,9 @@ footer nav a{color:#d9e2d4}
         <p>Приймаємо замовлення щодня з 9:00 до 20:00.</p>
       </div>
       <div class="contacts-grid">
-        <a class="contact" data-phone-link href="#"><span>Телефон</span><b data-phone>+38 (000) 000 00 00</b></a>
-        <a class="contact" data-viber-link href="#" target="_blank" rel="noopener"><span>Viber</span><b data-phone>+38 (000) 000 00 00</b></a>
-        <a class="contact" data-telegram-link href="#" target="_blank" rel="noopener"><span>Telegram</span><b data-telegram>@your_telegram</b></a>
-        <a class="contact" data-instagram-link href="#" target="_blank" rel="noopener"><span>Instagram</span><b data-instagram>@your_instagram</b></a>
+        <a class="contact" data-phone-link href="#"><span>Телефон</span><b data-phone>+38 (068) 983 40 28</b></a>
+        <a class="contact" data-viber-link href="#" target="_blank" rel="noopener"><span>Viber</span><b data-phone>+38 (068) 983 40 28</b></a>
+        <a class="contact" data-instagram-link href="#" target="_blank" rel="noopener"><span>Instagram</span><b data-instagram>@family_garden_center</b></a>
       </div>
     </div>
   </section>
@@ -616,10 +616,9 @@ footer nav a{color:#d9e2d4}
 <script>
 /* ====== НАЛАШТУВАННЯ: змініть на свої дані ====== */
 const CONFIG = {
-  phone: "+38 (000) 000 00 00",   // як показувати номер
-  phoneRaw: "+380000000000",      // номер без пробілів для дзвінка та Viber
-  telegram: "your_telegram",      // нік у Telegram без @
-  instagram: "your_instagram",    // нік в Instagram без @
+  phone: "+38 (068) 983 40 28",   // як показувати номер
+  phoneRaw: "+380689834028",      // номер без пробілів для дзвінка та Viber
+  instagram: "family_garden_center", // нік в Instagram без @
   minOrder: 300,
   prepay: 100,
 
@@ -708,8 +707,6 @@ const catName = id => (CATEGORIES.find(c => c.id === id) || {}).name || "";
 document.querySelectorAll("[data-phone]").forEach(e => e.textContent = CONFIG.phone);
 document.querySelectorAll("[data-phone-link]").forEach(e => e.href = "tel:" + CONFIG.phoneRaw);
 document.querySelectorAll("[data-viber-link]").forEach(e => e.href = "viber://chat?number=" + encodeURIComponent(CONFIG.phoneRaw));
-document.querySelectorAll("[data-telegram]").forEach(e => e.textContent = "@" + CONFIG.telegram);
-document.querySelectorAll("[data-telegram-link]").forEach(e => e.href = "https://t.me/" + CONFIG.telegram);
 document.querySelectorAll("[data-instagram]").forEach(e => e.textContent = "@" + CONFIG.instagram);
 document.querySelectorAll("[data-instagram-link]").forEach(e => e.href = "https://instagram.com/" + CONFIG.instagram);
 $("#year").textContent = new Date().getFullYear();
@@ -1133,7 +1130,6 @@ function showPayment() {
       <h3 class="h-sub">Надішліть замовлення і квитанцію</h3>
       <div class="row">
         <a class="btn btn-gold" href="viber://forward?text=${enc}">Надіслати у Viber</a>
-        <a class="btn btn-main" href="https://t.me/${CONFIG.telegram}?text=${enc}" target="_blank" rel="noopener">Надіслати в Telegram</a>
       </div>
       <button type="button" class="btn btn-ghost" data-copy="${esc(o.text)}">Скопіювати текст замовлення</button>
       <p class="small">Або зателефонуйте: <b>${CONFIG.phone}</b></p>
