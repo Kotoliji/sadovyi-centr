@@ -146,6 +146,7 @@ nav.main a:hover{background:rgba(255,255,255,.08);color:var(--gold)}
 .price.is-sale{color:var(--sale)}
 .add{min-height:50px;padding:0 16px;font-size:16px;white-space:nowrap}
 .add.added{background:var(--ok);color:#fff}
+.grid-msg{grid-column:1/-1;display:grid;gap:14px;justify-items:start;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px}
 .card-img > a{display:block;height:100%;overflow:hidden}
 .card-img > a img{transition:transform .35s}
 .card:hover .card-img > a img{transform:scale(1.04)}
@@ -608,6 +609,7 @@ footer nav a{color:#d9e2d4}
   <div class="wrap co-body" id="coBody"></div>
 </div>
 
+<script src="shared.js"></script>
 <script>
 /* ====== НАЛАШТУВАННЯ: змініть на свої дані ====== */
 const CONFIG = {
@@ -616,31 +618,15 @@ const CONFIG = {
   instagram: "family_garden_center", // нік в Instagram без @
   minOrder: 300,
   prepay: 100,
-  hours: "щодня з 9:00 до 20:00",
-
-  // Куди сайт надсилає замовлення (Cloudflare Worker, який пересилає його в Telegram).
-  // ⚠ Поки порожньо — ДЕМО: покупець бачить «Замовлення надіслано», але замовлення нікуди не приходить.
-  orderEndpoint: ""
+  hours: "щодня з 9:00 до 20:00"
 };
+// Адреса API і категорії — у файлі shared.js
 
-/* ====== ТОВАРИ: додавайте / змінюйте тут ====== */
-// img — фото плитки категорії; also — які ще категорії показувати разом із цією
-const CATEGORIES = [
-  {id:"all", name:"Усі саджанці", img:"img/seedlings.jpg"},
-  {id:"roses", name:"Троянди", img:"img/rose1.jpg"},
-  {id:"fruit", name:"Плодові", img:"img/apple.jpg"},
-  {id:"berries", name:"Ягоди", img:"img/blackberry.jpg", also:["strawberry"]},
-  {id:"strawberry", name:"Полуниця", img:"img/strawberry.jpg"},
-  {id:"grapes", name:"Виноград", img:"img/grapes.jpg"},
-  {id:"nuts", name:"Горіхи", img:"img/walnut.jpg"},
-  {id:"exotic", name:"Екзотичні", img:"img/fig.jpg"},
-  {id:"decor", name:"Декоративні", img:"img/lavender.jpg"},
-  {id:"sale", name:"Акційні"}
-];
-// note — короткий підпис на картці; desc — опис на сторінці товару (абзаци);
-// specs — характеристики [назва, значення]; imgs — додаткові фото для галереї (необов'язково)
+/* ====== ТОВАРИ ======
+   Коли в shared.js вказано API_BASE, рослини беруться з бази й редагуються в кабінеті (admin.html).
+   Список нижче — демо-каталог, який показується, поки API не підключено. */
 // ⚠ Описи й характеристики нижче — приклад, перевірте їх перед запуском.
-const PRODUCTS = [
+const DEMO_PRODUCTS = [
   {id:1, cat:"roses", name:"Троянда плетиста «Воллертон Олд Хол»", note:"Кремово-абрикосова, сильний аромат, до 3 м", price:115, img:"img/rose1.jpg", stock:true,
     desc:["Плетиста англійська троянда з чашоподібними кремово-абрикосовими квітками та сильним ароматом.", "Добре підходить для арок, пергол і стін будинку. Цвіте кілька разів за сезон."],
     specs:[["Тип","плетиста"],["Висота","до 3 м"],["Колір","кремово-абрикосовий"],["Аромат","сильний"],["Цвітіння","повторне, червень–вересень"],["Місце","сонце або легка півтінь"]]},
@@ -714,6 +700,8 @@ const cartTotal = () => cartItems().reduce((s, x) => s + x.p.price * x.q, 0);
 const updateCount = () => { $("#cartCount").textContent = cartItems().reduce((s, x) => s + x.q, 0); };
 
 // фільтри й товари
+let PRODUCTS = API_BASE ? [] : DEMO_PRODUCTS;
+let catalogState = API_BASE ? "loading" : "ready";
 let current = "all";
 function renderFilters() {
   $("#filters").innerHTML = CATEGORIES.map(c => `
@@ -734,7 +722,7 @@ const salePct = p => Math.round((1 - p.price / p.old) * 100);
 const cardHTML = p => `
     <article class="card">
       <div class="card-img">
-        <a href="#p-${p.id}" tabindex="-1" aria-hidden="true"><img src="${p.img}" alt="" loading="lazy" width="600" height="600"></a>
+        <a href="#p-${p.id}" tabindex="-1" aria-hidden="true"><img src="${imgUrl(p.img)}" alt="" loading="lazy" width="600" height="600"></a>
         ${p.old ? `<span class="tag-sale">−${salePct(p)}%</span>` : ""}
       </div>
       <div class="card-body">
@@ -749,6 +737,11 @@ const cardHTML = p => `
       </div>
     </article>`;
 function renderGrid() {
+  if (catalogState === "loading") { $("#grid").innerHTML = `<p class="small">Завантажуємо каталог…</p>`; return; }
+  if (catalogState === "error") {
+    $("#grid").innerHTML = `<div class="grid-msg"><p>Не вдалося завантажити каталог. Оновіть сторінку або зателефонуйте нам — підкажемо, що є в наявності.</p><a class="btn btn-gold" href="tel:${CONFIG.phoneRaw}">${CONFIG.phone}</a></div>`;
+    return;
+  }
   const list = PRODUCTS.filter(p => inCategory(p, current));
   $("#grid").innerHTML = list.map(cardHTML).join("") || `<p class="small">У цій категорії поки немає товарів.</p>`;
 }
@@ -777,7 +770,7 @@ const SITE_TITLE = document.title;
 let pvQty = 1;
 
 function renderProduct(p) {
-  const imgs = [p.img, ...(p.imgs || [])];
+  const imgs = [p.img, ...(p.imgs || [])].filter(Boolean).map(imgUrl);
   const related = [...PRODUCTS.filter(x => x.id !== p.id && x.cat === p.cat),
                    ...PRODUCTS.filter(x => x.id !== p.id && x.cat !== p.cat && x.stock === p.stock)].slice(0, 4);
   pvQty = 1;
@@ -904,7 +897,7 @@ function renderCart() {
   const short = total < CONFIG.minOrder;
   body.innerHTML = items.map(({p, q}) => `
     <div class="line">
-      <img src="${p.img}" alt="">
+      <img src="${imgUrl(p.img)}" alt="">
       <div>
         <div class="line-name">${p.name}</div>
         <div class="line-row">
@@ -1059,7 +1052,7 @@ $("#coBody").addEventListener("submit", e => {
     email: get("email"),
     delivery: {type: get("type"), city: get("city"), np: get("np")},
     note: get("note"),
-    items: cartItems().map(({p, q}) => ({name: p.name, qty: q, price: p.price})),
+    items: cartItems().map(({p, q}) => ({id: p.id, name: p.name, qty: q, price: p.price})),
     total: cartTotal(),
     website: get("website")
   };
@@ -1073,26 +1066,28 @@ function orderText(o) {
     `\nДоставка: ${o.delivery.type}, ${o.delivery.city}, ${o.delivery.np}` + (o.note ? `\nНотатки: ${o.note}` : "");
 }
 
-// надсилає замовлення на CONFIG.orderEndpoint (Cloudflare Worker → Telegram)
+// надсилає замовлення в API (зберігається в кабінеті, за потреби — сповіщення в Telegram)
 async function submitOrder(btn) {
   sending = true;
   if (btn) { btn.disabled = true; btn.textContent = "Надсилаємо…"; }
   try {
-    if (!CONFIG.orderEndpoint) {
-      // ДЕМО: бот ще не підключений — замовлення нікуди не надсилається, лише показуємо екран «надіслано»
-      console.info("Демо-режим: orderEndpoint порожній, замовлення не надіслано", order);
+    if (!API_BASE) {
+      // ДЕМО: API ще не підключений — замовлення нікуди не надсилається, лише показуємо екран «надіслано»
+      console.info("Демо-режим: API_BASE порожній, замовлення не надіслано", order);
       cart = {}; save(); updateCount();
       showSent();
       return;
     }
     const ctrl = new AbortController(), timer = setTimeout(() => ctrl.abort(), 15000);
-    const r = await fetch(CONFIG.orderEndpoint, {
+    const r = await fetch(API_BASE + "/order", {
       method: "POST", headers: {"Content-Type": "application/json"},
       body: JSON.stringify(order), signal: ctrl.signal
     });
     clearTimeout(timer);
     const res = await r.json().catch(() => ({}));
     if (!r.ok || !res.ok) throw new Error(res.error || "HTTP " + r.status);
+    if (res.num) order.num = res.num;
+    if (res.total) order.total = res.total;
     cart = {}; save(); updateCount();
     showSent();
   } catch (err) {
@@ -1153,8 +1148,20 @@ $("#coBody").addEventListener("click", e => {
 });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("#checkout").hidden) $("#coBack").click(); });
 
+const fromApi = p => ({...p, img: (p.images || [])[0] || "", imgs: (p.images || []).slice(1)});
+function catalogReady() {
+  catalogState = "ready";
+  const badge = $(".hero-badge b"); if (badge) badge.textContent = PRODUCTS.length;
+  renderGrid(); updateCount();
+  if (/^#p-\d+$/.test(location.hash)) route();
+}
 renderFilters(); renderGrid(); updateCount();
-if (/^#p-\d+$/.test(location.hash)) route();
+if (API_BASE) {
+  fetch(API_BASE + "/products")
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(d => { PRODUCTS = d.products.map(fromApi); catalogReady(); })
+    .catch(e => { console.warn("Каталог не завантажився:", e); catalogState = "error"; renderGrid(); });
+} else catalogReady();
 </script>
 </body>
 </html>
