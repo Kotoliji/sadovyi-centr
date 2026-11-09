@@ -53,6 +53,11 @@ button,input,select,textarea{font:inherit;color:inherit}
 .login-card img{width:120px;border-radius:8px;justify-self:center}
 .login-card h1{text-align:center;font-size:26px}
 .login-err{color:var(--sale);font-weight:600;font-size:15px;min-height:1.5em;text-align:center}
+.login-hint{background:rgba(209,171,85,.15);border-radius:10px;padding:10px 12px;font-size:14px;text-align:center;line-height:1.45}
+.login-back{justify-self:center;font-weight:600;font-size:15px;text-decoration:none}
+.demo-bar{background:var(--gold);color:#10241a;font-size:14px}
+.demo-bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;padding-block:8px}
+.demo-bar button{background:rgba(16,36,26,.12);border:0;border-radius:8px;min-height:34px;padding:0 12px;font-weight:600;cursor:pointer;color:#10241a}
 
 /* fields */
 .field{display:grid;gap:6px;font-weight:600;font-size:15px}
@@ -185,6 +190,8 @@ main{padding-block:24px 80px}
     <label class="field">Пароль<input type="password" id="password" autocomplete="current-password" required></label>
     <button class="btn btn-gold" type="submit">Увійти</button>
     <p class="login-err" id="loginErr" role="alert"></p>
+    <p class="login-hint" id="loginHint" hidden>Демо-версія кабінету — пароль <b>demo</b>.<br>Справжній вхід з'явиться після підключення сервера.</p>
+    <a class="login-back" href="./">← Повернутися на сайт</a>
   </form>
 </div>
 
@@ -199,6 +206,7 @@ main{padding-block:24px 80px}
       <button class="logout" id="logout" type="button">Вийти</button>
     </div>
   </header>
+  <div class="demo-bar" id="demoBar" hidden><div class="wrap"><span><b>Демо-режим.</b> Зміни зберігаються лише в цьому браузері — покупці їх не бачать.</span><button type="button" id="demoReset">Скинути демо-дані</button></div></div>
   <main class="wrap" id="view"></main>
 </div>
 
@@ -210,6 +218,7 @@ main{padding-block:24px 80px}
 <div class="toast" id="toast" hidden role="status"></div>
 
 <script src="shared.js"></script>
+<script src="demo.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -245,11 +254,13 @@ function when(iso) {
 const ERRORS = {
   wrong_password: "Невірний пароль", too_many_attempts: "Забагато спроб. Спробуйте через 15 хвилин.",
   name: "Вкажіть назву", cat: "Оберіть категорію", price: "Вкажіть ціну", too_large: "Файл завеликий",
-  type: "Цей формат фото не підтримується — оберіть JPG або PNG", network: "Немає зв'язку з сервером. Перевірте інтернет."
+  type: "Цей формат фото не підтримується — оберіть JPG або PNG", network: "Немає зв'язку з сервером. Перевірте інтернет.",
+  storage: "Демо: у браузері закінчилось місце для фото. Натисніть «Скинути демо-дані»."
 };
 const errText = e => ERRORS[e.code] || ERRORS[e.message] || "Щось пішло не так. Спробуйте ще раз.";
 
 async function api(path, {method = "GET", json, body, headers = {}} = {}) {
+  if (!API_BASE) return Demo.api(path, {method, json, body}); // демо: дані в цьому браузері
   if (token) headers.Authorization = "Bearer " + token;
   if (json !== undefined) { headers["Content-Type"] = "application/json"; body = JSON.stringify(json); }
   let r;
@@ -557,7 +568,7 @@ async function shrink(file) {
       i.src = url;
     });
   } finally { setTimeout(() => URL.revokeObjectURL(url), 1000); }
-  const w = src.naturalWidth, h = src.naturalHeight, k = Math.min(1, 1400 / Math.max(w, h));
+  const w = src.naturalWidth, h = src.naturalHeight, k = Math.min(1, (API_BASE ? 1400 : 900) / Math.max(w, h));
   const c = document.createElement("canvas");
   c.width = Math.round(w * k); c.height = Math.round(h * k);
   c.getContext("2d").drawImage(src, 0, 0, c.width, c.height);
@@ -617,8 +628,15 @@ async function deleteProduct(btn) {
 
 /* ---------- старт ---------- */
 if (!API_BASE) {
-  document.body.innerHTML = `<div class="login"><div class="login-card"><img src="img/logo-wide.jpg" alt=""><h1>Кабінет ще не підключено</h1><p class="muted" style="text-align:center">Вкажіть адресу API у файлі shared.js (API_BASE).</p></div></div>`;
-} else if (token) start(); else showLogin();
+  // демо: попереджаємо, що дані лише в цьому браузері
+  $("#loginHint").hidden = false;
+  $("#demoBar").hidden = false;
+  $("#demoReset").addEventListener("click", () => {
+    if (!confirm("Скинути демо-дані? Рослини повернуться до початкових, демо-замовлення зникнуть.")) return;
+    Demo.reset(); orders = []; products = []; lastNewCount = null; route(); toast("Демо-дані скинуто");
+  });
+}
+if (token) start(); else showLogin();
 </script>
 </body>
 </html>
