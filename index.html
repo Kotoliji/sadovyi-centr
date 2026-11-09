@@ -106,7 +106,7 @@ nav.main a:hover{background:rgba(255,255,255,.08);color:var(--gold)}
 .hero-arc{position:absolute;left:-10%;right:-10%;bottom:-60px;height:120px;border-top:3px solid rgba(209,171,85,.35);border-radius:50% 50% 0 0}
 
 /* terms */
-.terms{padding-block:0;margin-top:-36px;position:relative;z-index:2}
+.terms{padding-block:0 64px}
 .terms-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--paper);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
 .term{padding:24px;display:grid;gap:6px;border-right:1px solid var(--line)}
 .term:last-child{border-right:0}
@@ -456,7 +456,6 @@ footer nav a{color:#d9e2d4}
         <h1 style="margin-top:12px">Саджанці для вашого саду — <em>з турботою від нашої родини</em></h1>
         <p class="lead">Троянди, плодові дерева, ягідні кущі та декоративні рослини. Кожен саджанець викопуємо під ваше замовлення й надсилаємо Новою Поштою по всій Україні.</p>
         <div class="actions">
-          <a class="btn btn-gold" href="#catalog">Перейти до каталогу</a>
           <a class="btn btn-ghost" href="#how">Як замовити</a>
         </div>
       </div>
@@ -466,6 +465,18 @@ footer nav a{color:#d9e2d4}
       </div>
     </div>
     <div class="hero-arc" aria-hidden="true"></div>
+  </section>
+
+  <section id="catalog">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Каталог</p>
+        <h2>Оберіть саджанці</h2>
+        <p>Натисніть на категорію, щоб побачити лише потрібні рослини. Ціна вказана за один саджанець, якщо не написано інше.</p>
+      </div>
+      <div class="cats" id="filters" role="group" aria-label="Категорії саджанців"></div>
+      <div class="grid" id="grid"></div>
+    </div>
   </section>
 
   <section class="terms" aria-label="Умови замовлення">
@@ -488,18 +499,6 @@ footer nav a{color:#d9e2d4}
           <b>Порада садівника</b><span>підкажемо, що і де посадити</span>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section id="catalog">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Каталог</p>
-        <h2>Оберіть саджанці</h2>
-        <p>Натисніть на категорію, щоб побачити лише потрібні рослини. Ціна вказана за один саджанець, якщо не написано інше.</p>
-      </div>
-      <div class="cats" id="filters" role="group" aria-label="Категорії саджанців"></div>
-      <div class="grid" id="grid"></div>
     </div>
   </section>
 

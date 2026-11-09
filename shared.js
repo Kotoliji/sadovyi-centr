@@ -2,7 +2,7 @@
 
 // Адреса API (Cloudflare Worker), без «/» у кінці, напр. "https://sadovyi-centr-api.<акаунт>.workers.dev".
 // ⚠ Поки порожньо — ДЕМО: каталог береться з index.html, замовлення нікуди не надсилаються, кабінет не працює.
-const API_BASE = "";
+const API_BASE = "https://sadovyi-centr-api.sadovyi-centr-api.workers.dev";
 
 // Категорії. img — фото плитки; also — які ще категорії показувати разом із цією.
 // "all" і "sale" — службові (усі товари / товари зі старою ціною), рослину в них не додають.
