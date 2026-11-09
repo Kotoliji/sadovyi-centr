@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сімейний садовий центр</title>
+<meta name="description" content="Саджанці троянд, плодових дерев, ягід і декоративних рослин. Доставка Новою Поштою по всій Україні.">
+<link rel="icon" href="img/logo-mark.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --forest:#133b29;
+  --forest-deep:#0d2b1d;
+  --gold:#d1ab55;
+  --gold-ink:#86661c;
+  --ground:#f4f6f0;
+  --paper:#ffffff;
+  --ink:#1b2a21;
+  --muted:#4f5f55;
+  --line:#dbe2d6;
+  --sale:#b23b2e;
+  --ok:#2c7a46;
+  --wait:#8a6214;
+  --btn:#133b29;
+  --btn-ink:#ffffff;
+  --shadow:0 10px 30px rgba(13,43,29,.10);
+  --serif:"Lora",Georgia,"Times New Roman",serif;
+  --sans:"Montserrat","Segoe UI",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0f1d16;--paper:#16271e;--ink:#e9efe8;--muted:#a9b8ad;--line:#2a3f33;
+    --gold-ink:#dcb963;--sale:#e0705f;--ok:#6cc58a;--wait:#e0b45a;
+    --btn:#d1ab55;--btn-ink:#10241a;--shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0f1d16;--paper:#16271e;--ink:#e9efe8;--muted:#a9b8ad;--line:#2a3f33;
+  --gold-ink:#dcb963;--sale:#e0705f;--ok:#6cc58a;--wait:#e0b45a;
+  --btn:#d1ab55;--btn-ink:#10241a;--shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.6}
+img{max-width:100%;height:auto;display:block}
+[hidden]{display:none!important}
+h1,h2,h3{font-family:var(--serif);line-height:1.2;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px}
+section{padding-block:64px}
+.eyebrow{font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
+.section-head{display:grid;gap:10px;margin-bottom:32px;max-width:720px}
+.section-head h2{font-size:clamp(28px,4vw,40px)}
+.section-head p{color:var(--muted)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:12px;border:2px solid transparent;font:600 17px/1 var(--sans);text-decoration:none;cursor:pointer;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:#10241a}
+.btn-gold:hover{background:#dfbb66}
+.btn-main{background:var(--btn);color:var(--btn-ink)}
+.btn-ghost{background:transparent;border-color:currentColor}
+.btn svg{width:22px;height:22px;flex:none}
+
+/* top bar */
+.notice{background:var(--gold);color:#10241a;font-weight:600;font-size:16px;text-align:center;padding:10px 16px}
+
+/* header */
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--forest);color:#f3ecd6;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.head-row{display:flex;align-items:center;gap:20px;min-height:84px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--gold);flex:none}
+.brand img{width:74px;height:auto;border-radius:6px}
+.brand b{display:block;font-family:var(--serif);font-size:24px;letter-spacing:.02em;line-height:1}
+.brand small{display:block;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-top:4px}
+nav.main{display:flex;gap:2px;margin-left:auto}
+nav.main a{white-space:nowrap;padding:10px 12px;border-radius:8px;text-decoration:none;font-weight:500;font-size:17px;color:#f3ecd6}
+nav.main a:hover{background:rgba(255,255,255,.08);color:var(--gold)}
+.head-phone{display:grid;text-align:right;text-decoration:none;flex:none}
+.head-phone span{font-size:13px;color:#bfcbb9}
+.head-phone b{font-size:19px;color:var(--gold);white-space:nowrap}
+.cart-btn{position:relative;display:flex;align-items:center;gap:8px;background:var(--gold);color:#10241a;border:0;border-radius:12px;min-height:50px;padding:0 16px;font:600 17px var(--sans);cursor:pointer;flex:none}
+.cart-btn svg{width:24px;height:24px}
+.cart-count{min-width:26px;height:26px;border-radius:13px;background:var(--forest-deep);color:var(--gold);display:grid;place-items:center;font-size:14px;padding:0 6px}
+.menu-btn{display:none;background:none;border:2px solid rgba(243,236,214,.4);color:#f3ecd6;border-radius:10px;min-height:50px;padding:0 14px;font:600 16px var(--sans);cursor:pointer}
+
+/* hero */
+.hero{background:var(--forest);color:#f3ecd6;padding-block:56px 72px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(34px,5vw,56px);color:#fff}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p.lead{font-size:20px;color:#d7e0d2;margin-top:18px;max-width:34em}
+.hero .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.hero .btn-ghost{color:#f3ecd6}
+.hero-photo{position:relative}
+.hero-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px;border:3px solid rgba(209,171,85,.55)}
+.hero-badge{position:absolute;left:-18px;bottom:-22px;background:var(--paper);color:var(--ink);border-radius:14px;padding:14px 18px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center;max-width:280px}
+.hero-badge b{font-family:var(--serif);font-size:30px;color:var(--gold-ink);line-height:1}
+.hero-badge span{font-size:15px;line-height:1.35}
+.hero-arc{position:absolute;left:-10%;right:-10%;bottom:-60px;height:120px;border-top:3px solid rgba(209,171,85,.35);border-radius:50% 50% 0 0}
+
+/* terms */
+.terms{padding-block:0;margin-top:-36px;position:relative;z-index:2}
+.terms-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--paper);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.term{padding:24px;display:grid;gap:6px;border-right:1px solid var(--line)}
+.term:last-child{border-right:0}
+.term svg{width:34px;height:34px;color:var(--gold-ink)}
+.term b{font-size:22px;font-family:var(--serif)}
+.term span{color:var(--muted);font-size:16px;line-height:1.45}
+
+/* catalog */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.chip{min-height:48px;padding:0 20px;border-radius:24px;border:2px solid var(--line);background:var(--paper);color:var(--ink);font:600 16px var(--sans);cursor:pointer}
+.chip:hover{border-color:var(--gold)}
+.chip[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:#f3ecd6}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px}
+.card{background:var(--paper);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
+.card-img{position:relative;aspect-ratio:1/1;background:var(--line)}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.tag-sale{position:absolute;top:12px;left:12px;background:var(--sale);color:#fff;font-weight:700;font-size:14px;padding:6px 12px;border-radius:8px}
+.card-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card-cat{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.card h3{font-size:20px}
+.card-note{font-size:15px;color:var(--muted);line-height:1.45}
+.stock{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600}
+.stock::before{content:"";width:9px;height:9px;border-radius:50%;background:currentColor}
+.stock.in{color:var(--ok)}
+.stock.pre{color:var(--wait)}
+.card-foot{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-top:8px}
+.price{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.price s{display:block;font-size:15px;font-weight:500;color:var(--muted)}
+.price.is-sale{color:var(--sale)}
+.add{min-height:50px;padding:0 16px;font-size:16px;white-space:nowrap}
+.add.added{background:var(--ok);color:#fff}
+
+/* steps */
+.steps{background:var(--paper);border-block:1px solid var(--line)}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;counter-reset:s}
+.step{display:grid;gap:10px;align-content:start}
+.step-num{width:56px;height:56px;border-radius:50%;border:2px solid var(--gold);color:var(--gold-ink);display:grid;place-items:center;font:700 24px var(--serif)}
+.step h3{font-size:22px}
+.step p{color:var(--muted)}
+
+/* delivery */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.facts{display:grid;gap:0;border-top:1px solid var(--line)}
+.fact{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.fact dt{font-weight:600}
+.fact dd{margin:0;color:var(--muted)}
+.photo-frame img{width:100%;aspect-ratio:9/7;object-fit:cover;border-radius:16px}
+
+/* faq */
+.faq{display:grid;gap:12px;max-width:860px}
+.faq details{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:0 22px}
+.faq summary{cursor:pointer;list-style:none;padding:20px 0;font-weight:600;font-size:19px;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:28px;line-height:1;color:var(--gold-ink)}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding-bottom:20px;color:var(--muted)}
+
+/* about */
+.about{background:var(--forest);color:#e6ecdf}
+.about .wrap{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center}
+.about img{width:260px;border-radius:16px}
+.about h2{color:#fff;font-size:clamp(28px,4vw,40px)}
+.about p{margin-top:14px;max-width:40em}
+.about .sign{margin-top:18px;font-family:var(--serif);color:var(--gold);font-size:20px}
+
+/* contacts */
+.contacts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.contact{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:6px;text-decoration:none}
+.contact:hover{border-color:var(--gold)}
+.contact span{font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.contact b{font-size:19px;word-break:break-word}
+
+footer{background:var(--forest-deep);color:#b9c6b5;padding-block:36px;font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+footer b{color:var(--gold);font-family:var(--serif);font-size:18px}
+
+/* cart drawer */
+.overlay{position:fixed;inset:0;background:rgba(5,20,12,.55);z-index:60}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(480px,100%);background:var(--ground);z-index:61;display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.25);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;background:var(--forest);color:#f3ecd6}
+.drawer-head h2{font-size:24px;color:var(--gold)}
+.x{background:none;border:2px solid rgba(243,236,214,.4);color:#f3ecd6;border-radius:10px;width:48px;height:48px;font-size:26px;cursor:pointer}
+.drawer-body{flex:1;overflow-y:auto;padding:20px;display:grid;gap:16px;align-content:start}
+.line{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px}
+.line img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+.line-name{font-weight:600;font-size:16px;line-height:1.3}
+.line-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px}
+.qty{display:flex;align-items:center;gap:4px}
+.qty button{width:40px;height:40px;border-radius:8px;border:1px solid var(--line);background:var(--ground);color:var(--ink);font-size:20px;cursor:pointer}
+.qty output{min-width:30px;text-align:center;font-weight:700}
+.line-sum{font-weight:700;font-variant-numeric:tabular-nums}
+.remove{background:none;border:0;color:var(--sale);font:600 14px var(--sans);cursor:pointer;padding:4px 0;text-decoration:underline}
+.empty{text-align:center;color:var(--muted);padding:40px 10px}
+.total{display:flex;justify-content:space-between;font-size:22px;font-weight:700;padding:14px 0;border-top:2px solid var(--line)}
+.warn{background:#fbecd0;color:#6b4a0c;border-radius:10px;padding:12px 14px;font-size:15px}
+form.order{display:grid;gap:14px}
+form.order label{display:grid;gap:6px;font-weight:600;font-size:16px}
+form.order input,form.order textarea{font:500 17px var(--sans);padding:14px;border-radius:10px;border:2px solid var(--line);background:var(--paper);color:var(--ink);min-height:52px;width:100%}
+form.order input:focus,form.order textarea:focus{border-color:var(--gold);outline:none}
+.done{display:grid;gap:14px}
+.done pre{white-space:pre-wrap;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px;font:500 15px/1.5 var(--sans);margin:0}
+.done .row{display:flex;flex-wrap:wrap;gap:10px}
+.small{font-size:15px;color:var(--muted)}
+
+/* payment */
+.pay-sum{background:var(--forest);color:#f3ecd6;border-radius:14px;padding:18px 20px;display:grid;gap:2px}
+.pay-sum span{font-size:15px;color:#c9d5c4}
+.pay-sum b{font-size:34px;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1.2}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--line);padding:4px;border-radius:12px}
+.tabs button{min-height:48px;border:0;border-radius:9px;background:transparent;color:var(--ink);font:600 15px var(--sans);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--paper);box-shadow:0 1px 4px rgba(0,0,0,.14)}
+.qr-box{background:#fff;border-radius:14px;padding:18px;display:grid;justify-items:center;gap:12px;border:1px solid var(--line)}
+.qr-box p{color:#1b2a21;font-size:15px;text-align:center;line-height:1.45}
+#qr img,#qr canvas{width:220px;height:220px}
+.req{background:var(--paper);border:1px solid var(--line);border-radius:12px}
+.req-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.req-row:last-child{border-bottom:0}
+.req-row > div{min-width:0}
+.req-row span{display:block;font-size:13px;color:var(--muted)}
+.req-row b{display:block;font-size:16px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.copy{flex:none;min-height:40px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--ground);color:var(--ink);font:600 14px var(--sans);cursor:pointer}
+.copy.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.bank-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle;box-shadow:0 0 0 1px var(--muted)}
+.h-sub{font-size:20px;margin-top:6px}
+.thanks{text-align:center;justify-items:center;padding-top:30px}
+.thanks h3{font-size:26px}
+footer nav{display:flex;flex-wrap:wrap;gap:18px}
+footer nav a{color:#d9e2d4}
+
+/* checkout page */
+.checkout{position:fixed;inset:0;z-index:70;background:var(--ground);overflow-y:auto;padding-bottom:env(safe-area-inset-bottom,0px)}
+.co-bar{position:sticky;top:0;z-index:2;background:var(--forest);color:#f3ecd6;padding-top:env(safe-area-inset-top,0px)}
+.co-bar-row{display:flex;align-items:center;gap:16px;min-height:68px}
+.co-bar b{font-family:var(--serif);font-size:20px;color:var(--gold)}
+.co-back{background:none;border:2px solid rgba(243,236,214,.4);color:#f3ecd6;border-radius:10px;min-height:46px;padding:0 14px;font:600 16px var(--sans);cursor:pointer}
+.co-body{padding-block:32px 60px}
+.co-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:start}
+.co-fields{display:grid;gap:18px}
+.co-fields h2,.co-summary h2{font-family:var(--sans);font-size:20px;font-weight:700}
+.co-fields h2:not(:first-child){margin-top:14px}
+.co-two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.co-fields label{display:grid;gap:8px;font-size:16px;font-weight:500}
+.co-fields label i{color:var(--sale);font-style:normal;font-weight:700}
+.co-fields input,.co-fields select,.co-fields textarea{width:100%;min-height:52px;padding:12px 16px;border:1.5px solid #9aa89c;border-radius:14px;background:var(--paper);color:var(--ink);font:500 17px var(--sans)}
+.co-fields textarea{resize:vertical}
+.co-fields input:focus,.co-fields select:focus,.co-fields textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(209,171,85,.25)}
+.co-summary{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:28px 32px;display:grid;gap:0;position:sticky;top:90px}
+.co-summary h2{margin-bottom:14px}
+.sum-row{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px dashed var(--line);font-size:16px}
+.sum-row .num{white-space:nowrap;font-variant-numeric:tabular-nums}
+.sum-head{font-weight:700;border-bottom:2px solid var(--line)}
+.sum-col{flex-direction:column;gap:6px}
+.sum-col span{color:var(--muted)}
+.sum-total{border-bottom:0;font-size:18px}
+.pay-box{border:1px solid var(--line);border-radius:4px;margin:14px 0 18px}
+.pay-line{display:flex;align-items:center;gap:12px;padding:18px 22px;font-weight:700;border-bottom:1px solid var(--line);cursor:pointer}
+.pay-line input{width:20px;height:20px;accent-color:var(--forest);margin:0}
+.pay-box p{padding:18px 22px;font-size:15px}
+.co-submit{width:100%;margin-top:18px}
+.co-done{max-width:600px;margin:0 auto;justify-items:stretch}
+.co-done > .step-num{justify-self:center}
+.co-done > h2{text-align:center;font-size:28px}
+#toCheckout{width:100%}
+#toCheckout:disabled{opacity:.5;cursor:not-allowed}
+
+/* mobile call bar */
+.callbar{display:none}
+
+@media (max-width:1320px){
+  .head-phone{display:none}
+}
+@media (max-width:1020px){
+  nav.main{display:none}
+  .menu-btn{display:block;margin-left:auto}
+  nav.main.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--forest);padding:10px 16px 18px;border-top:1px solid rgba(255,255,255,.1)}
+  nav.main.open a{font-size:19px;padding:14px}
+  .terms-grid{grid-template-columns:1fr 1fr}
+  .term:nth-child(2){border-right:0}
+  .term:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .contacts-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .co-grid{grid-template-columns:1fr;gap:28px}
+  .co-summary{position:static;padding:22px 18px}
+  .co-body{padding-block:24px 40px}
+  body{font-size:17px}
+  section{padding-block:48px}
+  .hero .wrap,.two,.about .wrap{grid-template-columns:1fr}
+  .hero-badge{left:12px;bottom:-18px}
+  .steps-grid{grid-template-columns:1fr;gap:24px}
+  .fact{grid-template-columns:1fr;gap:4px}
+  .about img{width:180px}
+  .brand img{width:58px}
+  .brand b{font-size:20px}
+  .brand small{font-size:10px}
+  .cart-btn .cart-label{display:none}
+  .callbar{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--forest);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}
+  .callbar .btn{min-height:50px;font-size:16px;padding:0 10px}
+  footer{padding-bottom:110px}
+}
+@media (max-width:480px){
+  .co-two{grid-template-columns:1fr}
+  .co-bar b{font-size:17px}
+  .head-row{gap:10px;min-height:72px}
+  .brand{gap:8px}
+  .brand img{width:46px}
+  .brand b{font-size:18px}
+  .brand small{font-size:9px;letter-spacing:.14em}
+  .menu-btn{padding:0 12px;font-size:15px;min-height:46px}
+  .cart-btn{padding:0 10px;min-height:46px}
+  .terms-grid{grid-template-columns:1fr}
+  .term{border-right:0;border-bottom:1px solid var(--line)}
+  .contacts-grid{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr 1fr;gap:12px}
+  .card-body{padding:12px}
+  .card h3{font-size:17px}
+  .card-note{display:none}
+  .price{font-size:21px}
+  .card-foot{flex-direction:column;align-items:stretch}
+  .add{width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="notice" id="notice">Зараз у наявності троянди та лаванда. Плодові й ягідні — передзамовлення на весну.</div>
+
+<header class="site">
+  <div class="wrap head-row">
+    <a class="brand" href="#top" aria-label="Сімейний садовий центр — на головну">
+      <img src="img/logo-mark.jpg" alt="">
+      <span><b>Сімейний</b><small>садовий центр</small></span>
+    </a>
+    <nav class="main" id="nav" aria-label="Головне меню">
+      <a href="#catalog">Каталог</a>
+      <a href="#how">Як замовити</a>
+      <a href="#delivery">Доставка й оплата</a>
+      <a href="#faq">Питання</a>
+      <a href="#contacts">Контакти</a>
+    </nav>
+    <a class="head-phone" href="#contacts" data-phone-link>
+      <span>Приймаємо замовлення 9:00–20:00</span>
+      <b data-phone>+38 (000) 000 00 00</b>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Меню</button>
+    <button class="cart-btn" id="cartOpen" aria-label="Відкрити кошик">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.5L21 8H6.2"/><circle cx="10" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+      <span class="cart-label">Кошик</span>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow" style="color:var(--gold)">Саджанці з родинного розсадника</p>
+        <h1 style="margin-top:12px">Саджанці для вашого саду — <em>з турботою від нашої родини</em></h1>
+        <p class="lead">Троянди, плодові дерева, ягідні кущі та декоративні рослини. Кожен саджанець викопуємо під ваше замовлення й надсилаємо Новою Поштою по всій Україні.</p>
+        <div class="actions">
+          <a class="btn btn-gold" href="#catalog">Перейти до каталогу</a>
+          <a class="btn btn-ghost" href="#how">Як замовити</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="img/hero.jpg" alt="Ряди саджанців у горщиках у теплиці" width="1200" height="900">
+        <div class="hero-badge"><b>14</b><span>сортів у каталозі — троянди, дерева, ягоди, виноград</span></div>
+      </div>
+    </div>
+    <div class="hero-arc" aria-hidden="true"></div>
+  </section>
+
+  <section class="terms" aria-label="Умови замовлення">
+    <div class="wrap">
+      <div class="terms-grid">
+        <div class="term">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v12H4z"/><path d="M8 7V5h8v2"/><path d="M4 12h16"/></svg>
+          <b>від 300 грн</b><span>мінімальна сума замовлення</span>
+        </div>
+        <div class="term">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.5"/><circle cx="17" cy="17.5" r="1.5"/></svg>
+          <b>Нова Пошта</b><span>відправка по всій Україні за 1–3 дні</span>
+        </div>
+        <div class="term">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/></svg>
+          <b>100 грн</b><span>аванс, решта — при отриманні</span>
+        </div>
+        <div class="term">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-3-7-6.5-7-10.5A7 7 0 0 1 12 3a7 7 0 0 1 7 7.5c0 4-3 7.5-7 10.5z"/><path d="M12 7v7M9 11l3 3 3-3"/></svg>
+          <b>Порада садівника</b><span>підкажемо, що і де посадити</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Каталог</p>
+        <h2>Оберіть саджанці</h2>
+        <p>Натисніть на категорію, щоб побачити лише потрібні рослини. Ціна вказана за один саджанець, якщо не написано інше.</p>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Категорії"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="steps" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Як замовити</p>
+        <h2>Три простих кроки</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step"><div class="step-num">1</div><h3>Оберіть рослини</h3><p>Натисніть «У кошик» біля потрібних саджанців. Кількість можна змінити в кошику.</p></div>
+        <div class="step"><div class="step-num">2</div><h3>Залиште контакти</h3><p>Вкажіть ім’я, телефон, місто та відділення Нової Пошти. Ми передзвонимо й уточнимо деталі.</p></div>
+        <div class="step"><div class="step-num">3</div><h3>Оплатіть зручним способом</h3><p>Відскануйте QR-код у Приват24, monobank чи Ощад 24/7 або переказуйте на картку. Можна внести лише аванс 100 грн, а решту сплатити на пошті.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="delivery">
+    <div class="wrap two">
+      <div>
+        <div class="section-head">
+          <p class="eyebrow">Доставка й оплата</p>
+          <h2>Надсилаємо так, щоб коріння доїхало живим</h2>
+        </div>
+        <dl class="facts">
+          <div class="fact"><dt>Як пакуємо</dt><dd>Коріння у вологому субстраті та плівці, гілки захищені. Кожен сорт підписаний.</dd></div>
+          <div class="fact"><dt>Коли відправляємо</dt><dd>Троянди й лаванду — одразу. Плодові та ягідні — у сезон посадки: весна (березень–квітень) та осінь (жовтень–листопад).</dd></div>
+          <div class="fact"><dt>Вартість доставки</dt><dd>За тарифами Нової Пошти, зазвичай 80–150 грн за посилку.</dd></div>
+          <div class="fact"><dt>Оплата</dt><dd>Уся сума одразу або аванс 100 грн, а решта — накладеним платежем при отриманні. Оплата за QR-кодом чи реквізитами (Приват24, monobank, Ощад 24/7 та інші банки) або переказом на картку ПриватБанку, monobank чи Ощадбанку.</dd></div>
+        </dl>
+      </div>
+      <div class="photo-frame"><img src="img/seedlings.jpg" alt="Молоді саджанці на стелажах у теплиці" width="900" height="700" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Часті питання</p>
+        <h2>Відповідаємо на те, що питають найчастіше</h2>
+      </div>
+      <div class="faq">
+        <details><summary>Саджанець приживеться, якщо я новачок?</summary><p>Так. До кожної посилки кладемо коротку пам’ятку з посадки. А якщо щось незрозуміло — просто зателефонуйте, ми підкажемо.</p></details>
+        <details><summary>Що робити, якщо рослина приїхала пошкодженою?</summary><p>Сфотографуйте її на пошті при отриманні та напишіть нам у Viber. Ми замінимо саджанець або повернемо гроші.</p></details>
+        <details><summary>Чи можна приїхати й забрати самостійно?</summary><p>Так, за попереднім дзвінком. Адресу розсадника повідомимо по телефону.</p></details>
+        <details><summary>Коли краще садити плодові дерева?</summary><p>Навесні, до розпускання бруньок, або восени після листопаду — за 3–4 тижні до морозів.</p></details>
+        <details><summary>Чи є знижки на великі замовлення?</summary><p>Так. Від 2000 грн — знижка 5%, від 5000 грн — 10%. Для фермерів та озеленювачів домовляємось окремо.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="wrap">
+      <img src="img/logo-wide.jpg" alt="Логотип «Сімейний садовий центр»" width="624" height="520" loading="lazy">
+      <div>
+        <p class="eyebrow" style="color:var(--gold)">Про нас</p>
+        <h2 style="margin-top:10px">Дякуємо за довіру!</h2>
+        <p>Ми — родинний розсадник. Самі вирощуємо, доглядаємо і перевіряємо кожен саджанець, перш ніж надіслати його вам.</p>
+        <p>Хочемо, щоб ваш сад цвів і плодоносив багато років — тому продаємо лише ті сорти, які добре ростуть у нашому кліматі.</p>
+        <p class="sign">Ваш «Сімейний садовий центр»</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacts">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Контакти</p>
+        <h2>Зв’яжіться з нами зручним способом</h2>
+        <p>Приймаємо замовлення щодня з 9:00 до 20:00.</p>
+      </div>
+      <div class="contacts-grid">
+        <a class="contact" data-phone-link href="#"><span>Телефон</span><b data-phone>+38 (000) 000 00 00</b></a>
+        <a class="contact" data-viber-link href="#" target="_blank" rel="noopener"><span>Viber</span><b data-phone>+38 (000) 000 00 00</b></a>
+        <a class="contact" data-telegram-link href="#" target="_blank" rel="noopener"><span>Telegram</span><b data-telegram>@your_telegram</b></a>
+        <a class="contact" data-instagram-link href="#" target="_blank" rel="noopener"><span>Instagram</span><b data-instagram>@your_instagram</b></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>Сімейний садовий центр</b>
+    <nav aria-label="Документи"><a href="oferta.html">Публічна оферта</a><a href="oferta.html#privacy">Конфіденційність</a><a href="oferta.html#return">Обмін і повернення</a></nav>
+    <span>© <span id="year">2026</span> Усі права захищено</span>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a class="btn btn-gold" data-phone-link href="#">Зателефонувати</a>
+  <a class="btn btn-ghost" style="color:#f3ecd6" data-viber-link href="#" target="_blank" rel="noopener">Viber</a>
+</div>
+
+<!-- Кошик -->
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Кошик" role="dialog" aria-modal="true">
+  <div class="drawer-head"><h2>Ваше замовлення</h2><button class="x" id="cartClose" aria-label="Закрити кошик">×</button></div>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
+
+<!-- Оформлення замовлення -->
+<div class="checkout" id="checkout" hidden role="dialog" aria-modal="true" aria-label="Оформлення замовлення">
+  <div class="co-bar"><div class="wrap co-bar-row">
+    <button type="button" class="co-back" id="coBack">← Назад</button>
+    <b>Оформлення замовлення</b>
+  </div></div>
+  <div class="wrap co-body" id="coBody"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* ====== НАЛАШТУВАННЯ: змініть на свої дані ====== */
+const CONFIG = {
+  phone: "+38 (000) 000 00 00",   // як показувати номер
+  phoneRaw: "+380000000000",      // номер без пробілів для дзвінка та Viber
+  telegram: "your_telegram",      // нік у Telegram без @
+  instagram: "your_instagram",    // нік в Instagram без @
+  minOrder: 300,
+  prepay: 100,
+
+  // Реквізити для оплати (QR НБУ працює в Приват24, monobank, Ощад 24/7 та інших банках)
+  payee: "ФОП Прізвище Ім'я По батькові",
+  iban: "UA000000000000000000000000000",  // 29 символів, починається з UA
+  taxId: "0000000000",                     // РНОКПП (ІПН) або ЄДРПОУ отримувача
+
+  // Картки для переказу — залиште порожнім number, щоб приховати банк
+  cards: [
+    {bank: "ПриватБанк", number: "0000 0000 0000 0000", color: "#6cb33f"},
+    {bank: "monobank",   number: "0000 0000 0000 0000", color: "#111111"},
+    {bank: "Ощадбанк",   number: "0000 0000 0000 0000", color: "#00733c"}
+  ],
+  monoJar: ""  // необов'язково: посилання на банку monobank, напр. https://send.monobank.ua/jar/XXXXXXX
+};
+
+/* ====== ТОВАРИ: додавайте / змінюйте тут ====== */
+const CATEGORIES = [
+  {id:"all", name:"Усі"},
+  {id:"roses", name:"Троянди"},
+  {id:"fruit", name:"Плодові дерева"},
+  {id:"berries", name:"Ягоди"},
+  {id:"grapes", name:"Виноград"},
+  {id:"nuts", name:"Горіхи"},
+  {id:"exotic", name:"Екзотичні"},
+  {id:"decor", name:"Декоративні"},
+  {id:"sale", name:"Акції"}
+];
+const PRODUCTS = [
+  {id:1, cat:"roses", name:"Троянда плетиста «Воллертон Олд Хол»", note:"Кремово-абрикосова, сильний аромат, до 3 м", price:115, img:"img/rose1.jpg", stock:true},
+  {id:2, cat:"roses", name:"Троянда «Джентл Герміона»", note:"Англійська, ніжно-рожева, цвіте до морозів", price:110, old:125, img:"img/rose3.jpg", stock:true},
+  {id:3, cat:"roses", name:"Троянда чайно-гібридна «Піано»", note:"Піоновидна, червона, для зрізу", price:120, img:"img/rose2.jpg", stock:true},
+  {id:4, cat:"decor", name:"Лаванда вузьколиста «Хідкот»", note:"Морозостійка, для бордюрів і клумб", price:90, img:"img/lavender.jpg", stock:true},
+  {id:5, cat:"decor", name:"Самшит вічнозелений, набір 10 шт", note:"Для живоплоту, висота 15–20 см", price:500, img:"img/boxwood.jpg", stock:true},
+  {id:6, cat:"fruit", name:"Яблуня «Чорний Принц»", note:"Темно-бордові плоди, зимовий сорт", price:150, img:"img/apple.jpg", stock:false},
+  {id:7, cat:"fruit", name:"Яблуня «Джеромін»", note:"Рання, солодка, дає врожай на 3-й рік", price:145, img:"img/blossom.jpg", stock:false},
+  {id:8, cat:"berries", name:"Ожина «Потрійна корона»", note:"Без колючок, великі солодкі ягоди", price:140, old:160, img:"img/blackberry.jpg", stock:false},
+  {id:9, cat:"berries", name:"Малина ремонтантна «Полька»", note:"Плодоносить з липня до морозів", price:85, img:"img/raspberry.jpg", stock:false},
+  {id:10, cat:"berries", name:"Агрус «Командор»", note:"Майже без шипів, стійкий до хвороб", price:95, img:"img/gooseberry.jpg", stock:false},
+  {id:11, cat:"berries", name:"Полуниця «Альбіон», 5 розеток", note:"Ремонтантна, плодоносить усе літо", price:150, img:"img/strawberry.jpg", stock:false},
+  {id:12, cat:"grapes", name:"Виноград «Аркадія»", note:"Столовий, ранній, грона до 1 кг", price:130, img:"img/grapes.jpg", stock:false},
+  {id:13, cat:"nuts", name:"Горіх грецький «Ідеал»", note:"Скороплідний, перші горіхи на 2–3 рік", price:220, img:"img/walnut.jpg", stock:false},
+  {id:14, cat:"exotic", name:"Інжир «Брунсвік»", note:"Витримує до −25 °C з укриттям", price:240, img:"img/fig.jpg", stock:false}
+];
+
+/* ====== далі код, змінювати не потрібно ====== */
+const $ = s => document.querySelector(s);
+const money = n => n.toLocaleString("uk-UA") + " грн";
+const catName = id => (CATEGORIES.find(c => c.id === id) || {}).name || "";
+
+// контакти
+document.querySelectorAll("[data-phone]").forEach(e => e.textContent = CONFIG.phone);
+document.querySelectorAll("[data-phone-link]").forEach(e => e.href = "tel:" + CONFIG.phoneRaw);
+document.querySelectorAll("[data-viber-link]").forEach(e => e.href = "viber://chat?number=" + encodeURIComponent(CONFIG.phoneRaw));
+document.querySelectorAll("[data-telegram]").forEach(e => e.textContent = "@" + CONFIG.telegram);
+document.querySelectorAll("[data-telegram-link]").forEach(e => e.href = "https://t.me/" + CONFIG.telegram);
+document.querySelectorAll("[data-instagram]").forEach(e => e.textContent = "@" + CONFIG.instagram);
+document.querySelectorAll("[data-instagram-link]").forEach(e => e.href = "https://instagram.com/" + CONFIG.instagram);
+$("#year").textContent = new Date().getFullYear();
+
+// меню на телефоні
+$("#menuBtn").addEventListener("click", () => {
+  const open = $("#nav").classList.toggle("open");
+  $("#menuBtn").setAttribute("aria-expanded", open);
+});
+$("#nav").addEventListener("click", e => { if (e.target.tagName === "A") { $("#nav").classList.remove("open"); $("#menuBtn").setAttribute("aria-expanded", false); } });
+
+// кошик (зберігається в браузері)
+let cart = {};
+try { cart = JSON.parse(localStorage.getItem("sc-cart") || "{}") || {}; } catch (e) { cart = {}; }
+const save = () => { try { localStorage.setItem("sc-cart", JSON.stringify(cart)); } catch (e) {} };
+const cartItems = () => Object.entries(cart).map(([id, q]) => ({p: PRODUCTS.find(x => x.id == id), q})).filter(x => x.p && x.q > 0);
+const cartTotal = () => cartItems().reduce((s, x) => s + x.p.price * x.q, 0);
+const updateCount = () => { $("#cartCount").textContent = cartItems().reduce((s, x) => s + x.q, 0); };
+
+// фільтри й товари
+let current = "all";
+function renderFilters() {
+  $("#filters").innerHTML = CATEGORIES.map(c =>
+    `<button class="chip" data-cat="${c.id}" aria-pressed="${c.id === current}">${c.name}</button>`).join("");
+}
+function renderGrid() {
+  const list = PRODUCTS.filter(p => current === "all" || (current === "sale" ? p.old : p.cat === current));
+  $("#grid").innerHTML = list.map(p => `
+    <article class="card">
+      <div class="card-img">
+        <img src="${p.img}" alt="${p.name}" loading="lazy" width="600" height="600">
+        ${p.old ? `<span class="tag-sale">−${Math.round((1 - p.price / p.old) * 100)}%</span>` : ""}
+      </div>
+      <div class="card-body">
+        <span class="card-cat">${catName(p.cat)}</span>
+        <h3>${p.name}</h3>
+        <p class="card-note">${p.note}</p>
+        <span class="stock ${p.stock ? "in" : "pre"}">${p.stock ? "Є в наявності" : "Передзамовлення на весну"}</span>
+        <div class="card-foot">
+          <div class="price ${p.old ? "is-sale" : ""}">${p.old ? `<s>${money(p.old)}</s>` : ""}${money(p.price)}</div>
+          <button class="btn btn-main add" data-add="${p.id}">У кошик</button>
+        </div>
+      </div>
+    </article>`).join("") || `<p class="small">У цій категорії поки немає товарів.</p>`;
+}
+$("#filters").addEventListener("click", e => {
+  const b = e.target.closest("[data-cat]"); if (!b) return;
+  current = b.dataset.cat; renderFilters(); renderGrid();
+});
+$("#grid").addEventListener("click", e => {
+  const b = e.target.closest("[data-add]"); if (!b) return;
+  const id = b.dataset.add;
+  cart[id] = (cart[id] || 0) + 1; save(); updateCount();
+  b.textContent = "Додано ✓"; b.classList.add("added");
+  setTimeout(() => { b.textContent = "У кошик"; b.classList.remove("added"); }, 1400);
+});
+
+// шухляда кошика
+function openCart() { $("#overlay").hidden = false; $("#drawer").hidden = false; document.body.style.overflow = "hidden"; renderCart(); $("#cartClose").focus(); }
+function closeCart() { $("#overlay").hidden = true; $("#drawer").hidden = true; document.body.style.overflow = ""; }
+$("#cartOpen").addEventListener("click", openCart);
+$("#cartClose").addEventListener("click", closeCart);
+$("#overlay").addEventListener("click", closeCart);
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("#drawer").hidden) closeCart(); });
+
+function renderCart() {
+  const items = cartItems(), total = cartTotal(), body = $("#drawerBody");
+  if (!items.length) {
+    body.innerHTML = `<div class="empty"><p style="font-size:20px;font-weight:600;color:var(--ink)">Кошик порожній</p><p style="margin-top:8px">Оберіть саджанці в каталозі та натисніть «У кошик».</p><button class="btn btn-main" style="margin-top:20px" id="toCatalog">До каталогу</button></div>`;
+    $("#toCatalog").onclick = () => { closeCart(); location.hash = "catalog"; };
+    return;
+  }
+  const short = total < CONFIG.minOrder;
+  body.innerHTML = items.map(({p, q}) => `
+    <div class="line">
+      <img src="${p.img}" alt="">
+      <div>
+        <div class="line-name">${p.name}</div>
+        <div class="line-row">
+          <div class="qty">
+            <button data-dec="${p.id}" aria-label="Менше">−</button>
+            <output>${q}</output>
+            <button data-inc="${p.id}" aria-label="Більше">+</button>
+          </div>
+          <span class="line-sum">${money(p.price * q)}</span>
+        </div>
+        <button class="remove" data-del="${p.id}">Видалити</button>
+      </div>
+    </div>`).join("") + `
+    <div class="total"><span>Разом:</span><span>${money(total)}</span></div>
+    ${short ? `<p class="warn">Мінімальне замовлення — ${money(CONFIG.minOrder)}. Додайте ще товарів на ${money(CONFIG.minOrder - total)}.</p>` : ""}
+    <button class="btn btn-gold" id="toCheckout" type="button" ${short ? "disabled" : ""}>Оформити замовлення</button>
+    <p class="small">Аванс ${money(CONFIG.prepay)}, решта — при отриманні на Новій Пошті.</p>`;
+}
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const digits = s => String(s).replace(/\D/g, "");
+
+// номер замовлення: СЦ-260923-417
+function orderNo() {
+  const d = new Date(), p = n => String(n).padStart(2, "0");
+  return `СЦ-${String(d.getFullYear()).slice(2)}${p(d.getMonth() + 1)}${p(d.getDate())}-${Math.floor(100 + Math.random() * 900)}`;
+}
+
+// посилання-QR за стандартом НБУ (Приват24, monobank, Ощад 24/7 та ін.)
+function nbuLink(amount, purpose) {
+  const data = ["BCD", "002", "1", "UCT", "", CONFIG.payee, CONFIG.iban.replace(/\s/g, ""),
+    "UAH" + amount.toFixed(2), CONFIG.taxId, "", "", purpose.slice(0, 140), ""].join("\n");
+  const b64 = btoa(unescape(encodeURIComponent(data))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  return "https://bank.gov.ua/qr/" + b64;
+}
+
+function copyText(text, btn) {
+  const old = btn.textContent;
+  const ok = () => { btn.textContent = "Скопійовано"; btn.classList.add("ok"); setTimeout(() => { btn.textContent = old; btn.classList.remove("ok"); }, 1500); };
+  const fallback = () => {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    let done = false; try { done = document.execCommand("copy"); } catch (e) {}
+    ta.remove();
+    if (done) ok(); else btn.textContent = "Скопіюйте вручну";
+  };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(ok, fallback);
+  else fallback();
+}
+
+const reqRow = (label, value, copy = value) =>
+  `<div class="req-row"><div><span>${label}</span><b>${esc(value)}</b></div><button type="button" class="copy" data-copy="${esc(copy)}">Копіювати</button></div>`;
+
+// ---------- кошик: кількість, видалення ----------
+$("#drawerBody").addEventListener("click", e => {
+  const t = e.target.closest("button");
+  if (!t) return;
+  if (t.id === "toCheckout") { openCheckout(); return; }
+  if (t.dataset.inc) { cart[t.dataset.inc]++; }
+  else if (t.dataset.dec) { cart[t.dataset.dec] = Math.max(0, cart[t.dataset.dec] - 1); if (!cart[t.dataset.dec]) delete cart[t.dataset.dec]; }
+  else if (t.dataset.del) { delete cart[t.dataset.del]; }
+  else return;
+  save(); updateCount(); renderCart();
+});
+
+// ---------- сторінка оформлення ----------
+function openCheckout() {
+  closeCart();
+  renderCheckout();
+  $("#checkout").hidden = false;
+  document.body.style.overflow = "hidden";
+  $("#checkout").scrollTop = 0;
+  $("#c-first").focus();
+}
+function closeCheckout() {
+  $("#checkout").hidden = true;
+  document.body.style.overflow = "";
+}
+$("#coBack").addEventListener("click", () => {
+  const finished = !cartItems().length;
+  closeCheckout();
+  if (!finished) openCart();
+});
+
+const PLACES = {
+  "У відділення": "Номер відділення Нової Пошти",
+  "У поштомат": "Номер поштомату Нової Пошти",
+  "Кур'єром на адресу": "Вулиця, будинок, квартира"
+};
+
+function renderCheckout() {
+  const items = cartItems(), total = cartTotal();
+  $("#coBody").innerHTML = `
+    <form class="co-grid" id="coForm">
+      <div class="co-fields">
+        <h2>Оплата та доставка</h2>
+        <div class="co-two">
+          <label for="c-first">Ім'я <i>*</i><input id="c-first" name="first" required autocomplete="given-name"></label>
+          <label for="c-last">Прізвище <i>*</i><input id="c-last" name="last" required autocomplete="family-name"></label>
+        </div>
+        <label for="c-phone">Телефон <i>*</i><input id="c-phone" name="phone" type="tel" inputmode="tel" required autocomplete="tel"></label>
+        <label for="c-email">E-mail адреса <i>*</i><input id="c-email" name="email" type="email" required autocomplete="email"></label>
+
+        <h2>Вкажіть адресу доставки</h2>
+        <select id="c-type" name="type" aria-label="Спосіб доставки">
+          ${Object.keys(PLACES).map(k => `<option>${esc(k)}</option>`).join("")}
+        </select>
+        <input id="c-city" name="city" required placeholder="Населений пункт" aria-label="Населений пункт" autocomplete="address-level2">
+        <input id="c-np" name="np" required placeholder="${PLACES["У відділення"]}" aria-label="${PLACES["У відділення"]}">
+
+        <h2>Додаткова інформація</h2>
+        <label for="c-note">Нотатки до замовлення (необов'язково)<textarea id="c-note" name="note" rows="4" placeholder="Нотатки до вашого замовлення, наприклад спеціальні нотатки для доставки."></textarea></label>
+      </div>
+
+      <aside class="co-summary">
+        <h2>Ваше замовлення</h2>
+        <div class="sum-row sum-head"><span>Товар</span><span>Проміжний підсумок</span></div>
+        ${items.map(({p, q}) => `<div class="sum-row"><span>${esc(p.name)} <b>× ${q}</b></span><span class="num">${money(p.price * q)}</span></div>`).join("")}
+        <div class="sum-row"><b>Проміжний підсумок</b><b class="num">${money(total)}</b></div>
+        <div class="sum-row sum-col"><b>Відправлення</b><span>Нова Пошта — за тарифами перевізника</span></div>
+        <div class="sum-row sum-total"><b>Загалом</b><b class="num">${money(total)}</b></div>
+
+        <div class="pay-box">
+          <label class="pay-line" for="c-pay"><input type="radio" id="c-pay" name="pay" checked> Банківські реквізити</label>
+          <p>Сплата авансового платежу ${money(CONFIG.prepay)} є обов'язковою! Реквізити ПриватБанку, monobank та Ощадбанку з'являться після підтвердження замовлення.</p>
+        </div>
+
+        <p class="small">Ваші особисті дані використовуватимуться для обробки вашого замовлення та для інших цілей, описаних у нашій <a href="oferta.html#privacy" target="_blank" rel="noopener">політиці конфіденційності</a>.</p>
+        <button class="btn btn-gold co-submit" type="submit">Підтвердити замовлення</button>
+      </aside>
+    </form>`;
+}
+
+$("#coBody").addEventListener("change", e => {
+  if (e.target.id !== "c-type") return;
+  const ph = PLACES[e.target.value], np = $("#c-np");
+  np.placeholder = ph; np.setAttribute("aria-label", ph);
+});
+$("#coBody").addEventListener("input", e => {
+  if (e.target.id === "c-phone") e.target.setCustomValidity("");
+});
+
+let order = null;
+$("#coBody").addEventListener("submit", e => {
+  e.preventDefault();
+  const form = e.target, phone = form.querySelector("#c-phone"), d = digits(phone.value);
+  if (!(/^0\d{9}$/.test(d) || /^380\d{9}$/.test(d))) {
+    phone.setCustomValidity("Вкажіть номер у форматі 067 123 45 67 або +380 67 123 45 67");
+    phone.reportValidity();
+    return;
+  }
+  const f = new FormData(form), total = cartTotal(), num = orderNo();
+  const name = `${f.get("first")} ${f.get("last")}`.trim();
+  const lines = cartItems().map(({p, q}) => `• ${p.name} — ${q} шт × ${p.price} = ${money(p.price * q)}`);
+  order = {
+    num, total, toPay: Math.min(CONFIG.prepay, total),
+    purpose: `Аванс за замовлення ${num}, ${name}`,
+    text: `Замовлення ${num} з сайту «Сімейний садовий центр»\n\n${lines.join("\n")}\n\nЗагалом: ${money(total)}\n` +
+      `Аванс ${money(Math.min(CONFIG.prepay, total))}, решта ${money(Math.max(0, total - CONFIG.prepay))} — накладеним платежем` +
+      `\n\nІм'я: ${name}\nТелефон: ${f.get("phone")}\nE-mail: ${f.get("email")}\nДоставка: ${f.get("type")}, ${f.get("city")}, ${f.get("np")}` +
+      (f.get("note") ? `\nНотатки: ${f.get("note")}` : "")
+  };
+  cart = {}; save(); updateCount();
+  showPayment();
+});
+
+function showPayment() {
+  const o = order, link = nbuLink(o.toPay, o.purpose), enc = encodeURIComponent(o.text);
+  const cards = CONFIG.cards.filter(c => c.number);
+  $("#coBody").innerHTML = `
+    <div class="done co-done">
+      <div class="step-num">✓</div>
+      <h2>Дякуємо, замовлення прийнято!</h2>
+      <p>Номер замовлення: <b>${o.num}</b>. Щоб ми його відправили, сплатіть аванс і надішліть нам квитанцію.</p>
+      <div class="pay-sum">
+        <span>Аванс до сплати</span>
+        <b>${money(o.toPay)}</b>
+        <span>Решту ${money(Math.max(0, o.total - o.toPay))} сплатите на Новій Пошті при отриманні</span>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Спосіб оплати">
+        <button type="button" role="tab" data-tab="qr" aria-selected="true">QR-код / IBAN</button>
+        <button type="button" role="tab" data-tab="card" aria-selected="false">На картку</button>
+      </div>
+
+      <div id="tab-qr" class="done">
+        <div class="qr-box">
+          <div id="qr" aria-label="QR-код для оплати"></div>
+          <p>Відкрийте <b>Приват24</b>, <b>monobank</b>, <b>Ощад 24/7</b> або інший банк і відскануйте код — сума та реквізити підставляться самі.</p>
+        </div>
+        <a class="btn btn-gold" href="${link}" target="_blank" rel="noopener">Оплатити в застосунку банку</a>
+        <div class="req">
+          ${reqRow("Отримувач", CONFIG.payee)}
+          ${reqRow("IBAN", CONFIG.iban, CONFIG.iban.replace(/\s/g, ""))}
+          ${reqRow("РНОКПП / ЄДРПОУ", CONFIG.taxId)}
+          ${reqRow("Сума", money(o.toPay), o.toPay.toFixed(2))}
+          ${reqRow("Призначення платежу", o.purpose)}
+        </div>
+      </div>
+
+      <div id="tab-card" class="done" hidden>
+        <p class="small">Переказ з будь-якої картки. У коментарі до переказу напишіть номер замовлення <b>${o.num}</b>.</p>
+        <div class="req">
+          ${cards.map(c => reqRow(`<i class="bank-dot" style="background:${c.color}"></i>${esc(c.bank)}`, c.number, digits(c.number))).join("")}
+          ${reqRow("Сума", money(o.toPay), o.toPay.toFixed(2))}
+        </div>
+        ${CONFIG.monoJar ? `<a class="btn btn-main" href="${esc(CONFIG.monoJar)}" target="_blank" rel="noopener">Оплатити через банку monobank</a>` : ""}
+      </div>
+
+      <h3 class="h-sub">Надішліть замовлення і квитанцію</h3>
+      <div class="row">
+        <a class="btn btn-gold" href="viber://forward?text=${enc}">Надіслати у Viber</a>
+        <a class="btn btn-main" href="https://t.me/${CONFIG.telegram}?text=${enc}" target="_blank" rel="noopener">Надіслати в Telegram</a>
+      </div>
+      <button type="button" class="btn btn-ghost" data-copy="${esc(o.text)}">Скопіювати текст замовлення</button>
+      <p class="small">Або зателефонуйте: <b>${CONFIG.phone}</b></p>
+      <button type="button" class="btn btn-main" id="coDone">Повернутися на сайт</button>
+    </div>`;
+  const box = $("#qr");
+  if (window.QRCode) new QRCode(box, {text: link, width: 220, height: 220, correctLevel: QRCode.CorrectLevel.M});
+  else box.innerHTML = `<p>QR-код не завантажився. Скористайтеся кнопкою нижче або реквізитами.</p>`;
+  $("#checkout").scrollTop = 0;
+}
+
+$("#coBody").addEventListener("click", e => {
+  const t = e.target.closest("button");
+  if (!t) return;
+  if (t.dataset.copy !== undefined) { copyText(t.dataset.copy, t); return; }
+  if (t.dataset.tab) {
+    document.querySelectorAll("[data-tab]").forEach(b => b.setAttribute("aria-selected", b === t));
+    $("#tab-qr").hidden = t.dataset.tab !== "qr";
+    $("#tab-card").hidden = t.dataset.tab !== "card";
+    return;
+  }
+  if (t.id === "coDone") { closeCheckout(); order = null; }
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("#checkout").hidden) $("#coBack").click(); });
+
+renderFilters(); renderGrid(); updateCount();
+</script>
+</body>
+</html>
