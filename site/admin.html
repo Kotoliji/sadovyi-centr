@@ -126,6 +126,8 @@ main{padding-block:24px 80px}
 .actions{display:flex;flex-wrap:wrap;gap:10px}
 .items .it{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
 .items .it:last-child{border-bottom:0}
+.items .it-row{display:grid;grid-template-columns:64px 1fr auto;align-items:center}
+.it-img{width:64px;height:64px;border-radius:10px;object-fit:cover;background:var(--line);display:block}
 .items .num{white-space:nowrap;font-variant-numeric:tabular-nums}
 .items .total{font-weight:700;font-size:18px;border-top:2px solid var(--line);border-bottom:0;margin-top:4px}
 .statuses{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
@@ -377,6 +379,9 @@ async function openOrder(id) {
   let o;
   try { o = (await api("/admin/orders/" + id)).order; }
   catch (e) { $("#panelBody").innerHTML = `<div class="empty">${e.code === "not_found" ? "Замовлення не знайдено." : esc(errText(e))}</div>`; return; }
+  // фото товару: збережене в замовленні, а для старих замовлень — з каталогу
+  if (o.items.some(i => !i.img) && !products.length) await loadProducts();
+  const itemImg = i => i.img || ((products.find(p => p.id === i.id) || {}).images || [])[0] || "";
   const tel = o.phone.replace(/[^\d+]/g, "");
   $("#panelTitle").textContent = "Замовлення " + (o.num || "#" + o.id);
   $("#panelBody").innerHTML = `
@@ -399,7 +404,11 @@ async function openOrder(id) {
     ${o.note ? `<section class="card"><h2>Коментар клієнта</h2><div style="white-space:pre-wrap">${esc(o.note)}</div></section>` : ""}
     <section class="card items">
       <h2>Товари</h2>
-      ${o.items.map(i => `<div class="it"><span>${esc(i.name)} <b>× ${i.qty}</b><br><span class="muted" style="font-size:14px">${money(i.price)} за шт</span></span><span class="num">${money(i.price * i.qty)}</span></div>`).join("")}
+      ${o.items.map(i => { const src = itemImg(i); return `<div class="it it-row">
+        ${src ? `<img class="it-img" src="${esc(imgUrl(src))}" alt="" loading="lazy">` : `<span class="it-img"></span>`}
+        <span>${esc(i.name)} <b>× ${i.qty}</b><br><span class="muted" style="font-size:14px">${money(i.price)} за шт</span></span>
+        <span class="num">${money(i.price * i.qty)}</span>
+      </div>`; }).join("")}
       <div class="it total"><span>Разом</span><span class="num">${money(o.total)}</span></div>
     </section>
     <section class="card">

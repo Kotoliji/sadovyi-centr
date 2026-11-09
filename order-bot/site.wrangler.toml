@@ -1,0 +1,6 @@
+# Сам сайт (статичні файли з папки ../site). Викладка: npx wrangler deploy -c site.wrangler.toml
+name = "sadovyi-centr"
+compatibility_date = "2026-10-01"
+
+[assets]
+directory = "../site"

@@ -1,0 +1,15 @@
+name = "sadovyi-centr-api"
+main = "src/worker.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+# з яких адрес сайту приймати замовлення (через кому)
+ALLOWED_ORIGINS = "https://sadovyi-centr.sadovyi-centr-api.workers.dev"
+# посилання на кабінет — додається в повідомлення Telegram
+ADMIN_URL = "https://sadovyi-centr.sadovyi-centr-api.workers.dev/admin.html"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "sadovyi-centr"
+# база sadovyi-centr (створена через `npx wrangler d1 create sadovyi-centr`)
+database_id = "f296c5d7-a79d-4f17-8357-448901d846fa"
